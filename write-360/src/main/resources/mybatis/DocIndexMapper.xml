@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.write.dao.DocIndexCdrMapper">
+    <resultMap id="DocBaseMap" type="com.ylz.cdr.bean.DocIndex">
+        <result column="pk" property="pk" jdbcType="INTEGER"/>
+        <result column="xds_name" property="xdsName" jdbcType="VARCHAR"/>
+        <result column="empi" property="empi" jdbcType="VARCHAR"/>
+        <result column="encounter_id" property="encounterId" jdbcType="VARCHAR"/>
+        <result column="cda_path" property="cdaPath" jdbcType="VARCHAR"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="message_id" property="messageId" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="domain_id" property="domainId" jdbcType="VARCHAR"/>
+        <result column="unique_id" property="uniqueId" jdbcType="VARCHAR"/>
+        <result column="xds_type" property="xdsType" jdbcType="VARCHAR"/>
+        <result column="xds_node" property="xdsNode" jdbcType="VARCHAR"/>
+        <result column="effective_time" property="effectiveTime" jdbcType="VARCHAR"/>
+        <result column="security_level" property="securityLevel" jdbcType="VARCHAR"/>
+        <result column="security_level_name" property="securityLevelName" jdbcType="VARCHAR"/>
+        <result column="xds_version" property="xdsVersion" jdbcType="VARCHAR"/>
+        <result column="patient_id" property="patientId" jdbcType="VARCHAR"/>
+        <result column="inpatient_id" property="inpatientId" jdbcType="VARCHAR"/>
+        <result column="clinc_id" property="clincId" jdbcType="VARCHAR"/>
+        <result column="visit_time" property="visitTime" jdbcType="VARCHAR"/>
+        <result column="identify_no" property="identifyNo" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="hospital_code" property="hospitalCode" jdbcType="VARCHAR"/>
+        <result column="hospital_name" property="hospitalName" jdbcType="VARCHAR"/>
+        <result column="dept_code" property="deptCode" jdbcType="VARCHAR"/>
+        <result column="creater_id" property="createrId" jdbcType="VARCHAR"/>
+        <result column="creater" property="creater" jdbcType="VARCHAR"/>
+        <result column="custodian_code" property="custodianCode" jdbcType="VARCHAR"/>
+        <result column="custodian_name" property="custodianName" jdbcType="VARCHAR"/>
+        <result column="proc_status" property="procStatus" jdbcType="VARCHAR"/>
+        <result column="proc_time" property="procTime" jdbcType="TIMESTAMP"/>
+        <result column="error_info" property="errorInfo" jdbcType="VARCHAR"/>
+        <result column="error_times" property="errorTimes" jdbcType="INTEGER"/>
+        <result column="sync_status" property="syncStatus" jdbcType="VARCHAR"/>
+        <result column="sync_time" property="syncTime" jdbcType="TIMESTAMP"/>
+        <result column="sync_error_info" property="syncErrorInfo" jdbcType="VARCHAR"/>
+        <result column="sync_error_times" property="syncErrorTimes" jdbcType="INTEGER"/>
+        <result column="show_type" property="showType" jdbcType="VARCHAR"/>
+        <result column="show_path" property="showPath" jdbcType="VARCHAR"/>
+        <result column="visit_id" property="visitId" jdbcType="VARCHAR"/>
+        <result column="visit_times" property="visitTimes" jdbcType="VARCHAR"/>
+        <result column="visit_domain" property="visitDomain" jdbcType="VARCHAR"/>
+        <result column="patient_type" property="patientType" jdbcType="VARCHAR"/>
+        <result column="patient_type_code" property="patientTypeCode" jdbcType="VARCHAR"/>
+        <result column="dept_name" property="deptName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="DataMap" type="com.ylz.cdr.bean.DocIndex">
+        <result column="pk" property="pk" jdbcType="INTEGER"/>
+        <result column="REPORT_TITLE" property="xdsName" jdbcType="VARCHAR"/>
+        <result column="empi" property="empi" jdbcType="VARCHAR"/>
+        <result column="ENCOUNTER_ID" property="encounterId" jdbcType="VARCHAR"/>
+        <result column="cda_path" property="cdaPath" jdbcType="VARCHAR"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="upload_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="DOC_DOMAIN_ID" property="domainId" jdbcType="VARCHAR"/>
+        <result column="DOC_PIPELINE_ID" property="uniqueId" jdbcType="VARCHAR"/>
+        <result column="LOAD_TYPE" property="xdsType" jdbcType="VARCHAR"/>
+        <result column="xdsNode" property="xdsNode" jdbcType="VARCHAR"/>
+        <result column="DOC_EFFECTIVE_TIME" property="effectiveTime" jdbcType="VARCHAR"/>
+        <result column="DOC_CRYPTOGRAPHICCODE" property="securityLevel" jdbcType="VARCHAR"/>
+        <result column="DOC_CRYPTOGRAPHIC" property="securityLevelName" jdbcType="VARCHAR"/>
+        <result column="VERSION" property="xdsVersion" jdbcType="VARCHAR"/>
+        <result column="PATIENT_ID" property="patientId" jdbcType="VARCHAR"/>
+        <result column="INPATIENT" property="inpatientId" jdbcType="VARCHAR"/>
+        <result column="OUT_PATIENT_ID" property="clincId" jdbcType="VARCHAR"/>
+        <result column="VISIT_DATE" property="visitTime" jdbcType="VARCHAR"/>
+        <result column="ID_NUM" property="identifyNo" jdbcType="VARCHAR"/>
+        <result column="PATIENT_NAME" property="patientName" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_CODE" property="hospitalCode" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_NAME" property="hospitalName" jdbcType="VARCHAR"/>
+        <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR"/>
+        <result column="DOC_AUTHORCODE" property="createrId" jdbcType="VARCHAR"/>
+        <result column="DOC_AUTHOR" property="creater" jdbcType="VARCHAR"/>
+        <result column="DOC_CUSTODIANCODE" property="custodianCode" jdbcType="VARCHAR"/>
+        <result column="DOC_CUSTODIAN" property="custodianName" jdbcType="VARCHAR"/>
+        <result column="VISIT_ID" property="visitId" jdbcType="VARCHAR"/>
+        <result column="VISIT_TIMES" property="visitTimes" jdbcType="VARCHAR"/>
+        <result column="VISIT_DOMAIN" property="visitDomain" jdbcType="VARCHAR"/>
+        <result column="PATIENT_TYPE" property="patientType" jdbcType="VARCHAR"/>
+        <result column="PATIENT_TYPECODE" property="patientTypeCode" jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.ylz.cdr.bean.DocIndex">
+    insert into doc_index ( xds_name,
+        empi,encounter_id, cda_path, file_path,
+        message_id, create_time, domain_id,
+        unique_id, xds_type, xds_node,
+        effective_time, security_level, security_level_name,
+        xds_version, patient_id, inpatient_id,
+        clinc_id, visit_time, identify_no,
+        patient_name, hospital_code, hospital_name,
+        dept_code, creater_id, creater,
+        custodian_code, custodian_name, proc_status,proc_time,sync_status,
+        error_info,visit_id,visit_times,visit_flow_id,dept_name,
+        show_path,show_type,
+        patient_type_code,patient_type
+        )
+        values ( #{xdsName,jdbcType=VARCHAR},
+        #{empi,jdbcType=VARCHAR}, #{encounterId,jdbcType=VARCHAR},#{cdaPath,jdbcType=VARCHAR},
+        #{filePath,jdbcType=VARCHAR},
+        #{messageId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{domainId,jdbcType=VARCHAR},
+        #{uniqueId,jdbcType=VARCHAR}, #{xdsType,jdbcType=VARCHAR}, #{xdsNode,jdbcType=VARCHAR},
+        #{effectiveTime,jdbcType=VARCHAR}, #{securityLevel,jdbcType=VARCHAR}, #{securityLevelName,jdbcType=VARCHAR},
+        #{xdsVersion,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{inpatientId,jdbcType=VARCHAR},
+        #{clincId,jdbcType=VARCHAR}, #{visitTime,jdbcType=VARCHAR}, #{identifyNo,jdbcType=VARCHAR},
+        #{patientName,jdbcType=VARCHAR}, #{hospitalCode,jdbcType=VARCHAR}, #{hospitalName,jdbcType=VARCHAR},
+        #{deptCode,jdbcType=VARCHAR}, #{createrId,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR},
+        #{custodianCode,jdbcType=VARCHAR}, #{custodianName,jdbcType=VARCHAR}, #{procStatus,jdbcType=VARCHAR},
+         now(),#{syncStatus,jdbcType=VARCHAR},#{errorInfo,jdbcType=VARCHAR},
+         #{visitId,jdbcType=VARCHAR},#{visitTimes,jdbcType=VARCHAR},
+        #{visitFlowId,jdbcType=VARCHAR},#{deptName,jdbcType=VARCHAR},
+        #{showPath,jdbcType=VARCHAR},#{showType,jdbcType=VARCHAR},
+        #{patientTypeCode,jdbcType=VARCHAR},#{patientType,jdbcType=VARCHAR}
+        )
+  </insert>
+
+    <insert id="insertData">
+      insert into doc_index ( xds_name,
+        empi,encounter_id, cda_path, file_path,
+        message_id, create_time, domain_id,
+        unique_id, xds_type, xds_node,
+        effective_time, security_level, security_level_name,
+        xds_version, patient_id, inpatient_id,
+        clinc_id, visit_time, identify_no,
+        patient_name, hospital_code, hospital_name,
+        dept_code, creater_id, creater,
+        custodian_code, custodian_name, proc_status,sync_status,
+        error_info,visit_id,visit_times,visit_flow_id,dept_name,
+        show_path,show_type,
+        patient_type_code,patient_type
+        )
+        values ( #{docIndex.xdsName,jdbcType=VARCHAR},
+        #{docIndex.empi,jdbcType=VARCHAR}, #{docIndex.encounterId,jdbcType=VARCHAR},#{cdaPath,jdbcType=VARCHAR},
+        #{filePath,jdbcType=VARCHAR},
+        #{docIndex.messageId,jdbcType=VARCHAR}, #{docIndex.createTime,jdbcType=VARCHAR}, #{docIndex.domainId,jdbcType=VARCHAR},
+        #{docIndex.uniqueId,jdbcType=VARCHAR}, #{docIndex.xdsType,jdbcType=VARCHAR}, #{docIndex.xdsNode,jdbcType=VARCHAR},
+        #{docIndex.effectiveTime,jdbcType=VARCHAR}, #{docIndex.securityLevel,jdbcType=VARCHAR}, #{docIndex.securityLevelName,jdbcType=VARCHAR},
+        #{docIndex.xdsVersion,jdbcType=VARCHAR}, #{docIndex.patientId,jdbcType=VARCHAR}, #{docIndex.inpatientId,jdbcType=VARCHAR},
+        #{docIndex.clincId,jdbcType=VARCHAR}, #{docIndex.visitTime,jdbcType=VARCHAR}, #{docIndex.identifyNo,jdbcType=VARCHAR},
+        #{docIndex.patientName,jdbcType=VARCHAR}, #{docIndex.hospitalCode,jdbcType=VARCHAR}, #{docIndex.hospitalName,jdbcType=VARCHAR},
+        #{docIndex.deptCode,jdbcType=VARCHAR}, #{docIndex.createrId,jdbcType=VARCHAR}, #{docIndex.creater,jdbcType=VARCHAR},
+        #{docIndex.custodianCode,jdbcType=VARCHAR}, #{docIndex.custodianName,jdbcType=VARCHAR}, #{procStatus,jdbcType=VARCHAR},
+         #{syncStatus,jdbcType=VARCHAR},#{errorInfo,jdbcType=VARCHAR},#{visitId,jdbcType=VARCHAR},#{visitTimes,jdbcType=VARCHAR},
+        #{visitFlowId,jdbcType=VARCHAR},#{deptName,jdbcType=VARCHAR},
+        #{showPath,jdbcType=VARCHAR},#{showType,jdbcType=VARCHAR},
+        #{patientTypeCode,jdbcType=VARCHAR},#{patientType,jdbcType=VARCHAR}
+        )
+</insert>
+
+    <select id="queryByUniqueId" resultMap="DocBaseMap">
+    select * from doc_index t
+    where UNIQUE_ID = #{uniqueId,jdbcType=VARCHAR}
+    and DOMAIN_ID = #{domainId,jdbcType=VARCHAR}
+    and XDS_TYPE = #{xdsType,jdbcType=VARCHAR}
+    and XDS_VERSION = #{xdsVersion,jdbcType=VARCHAR}
+    and proc_status!='AD'
+  </select>
+
+    <update id="abandonData">
+    update doc_index t set t.proc_status=#{xdsStatus,jdbcType=VARCHAR} where t.pk=#{pk,jdbcType=DECIMAL}
+  </update>
+
+    <select id="queryByStatus" resultMap="DocBaseMap">
+        select t.* from doc_index t where t.proc_status in
+        <foreach collection="list" item="item" index="index"
+                 open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        AND t.proc_time <![CDATA[ < ]]>date_sub(now(),interval 5 hour)
+        order by t.pk limit 0,50
+    </select>
+
+    <update id="updateStatus" parameterType="com.ylz.cdr.bean.DocIndex">
+        UPDATE doc_index
+        SET
+        proc_status = #{procStatus,jdbcType=VARCHAR},
+        error_info = #{errorInfo,jdbcType=VARCHAR},
+        empi = #{empi,jdbcType=VARCHAR},
+        encounter_id = #{encounterId,jdbcType=VARCHAR},
+        proc_time = now(),
+        error_times = #{errorTimes,jdbcType=DECIMAL}
+        WHERE
+        pk = #{pk,jdbcType=DECIMAL}
+    </update>
+
+    <update id="update" parameterType="com.ylz.cdr.bean.DocIndex">
+        update doc_index
+    set
+      xds_name = #{xdsName,jdbcType=VARCHAR},
+      empi = #{empi,jdbcType=VARCHAR},
+      encounter_id = #{encounterId,jdbcType=VARCHAR},
+      cda_path = #{cdaPath,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      message_id = #{messageId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      domain_id = #{domainId,jdbcType=VARCHAR},
+      unique_id = #{uniqueId,jdbcType=VARCHAR},
+      xds_type = #{xdsType,jdbcType=VARCHAR},
+      xds_node = #{xdsNode,jdbcType=VARCHAR},
+      effective_time = #{effectiveTime,jdbcType=VARCHAR},
+      security_level = #{securityLevel,jdbcType=VARCHAR},
+      security_level_name = #{securityLevelName,jdbcType=VARCHAR},
+      xds_version = #{xdsVersion,jdbcType=VARCHAR},
+      patient_id = #{patientId,jdbcType=VARCHAR},
+      inpatient_id = #{inpatientId,jdbcType=VARCHAR},
+      clinc_id = #{clincId,jdbcType=VARCHAR},
+      visit_time = #{visitTime,jdbcType=VARCHAR},
+      identify_no = #{identifyNo,jdbcType=VARCHAR},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      hospital_code = #{hospitalCode,jdbcType=VARCHAR},
+      hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      dept_code = #{deptCode,jdbcType=VARCHAR},
+      creater_id = #{createrId,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      custodian_code = #{custodianCode,jdbcType=VARCHAR},
+      custodian_name = #{custodianName,jdbcType=VARCHAR},
+      proc_status = #{procStatus,jdbcType=VARCHAR},
+      proc_time = #{procTime,jdbcType=TIMESTAMP},
+      error_info = #{errorInfo,jdbcType=VARCHAR},
+      error_times = #{errorTimes,jdbcType=INTEGER},
+      sync_status =#{syncStatus,jdbcType=VARCHAR},
+      sync_error_times =#{syncErrorTimes,jdbcType=VARCHAR},
+      sync_error_info =#{syncErrorInfo,jdbcType=VARCHAR},
+      visit_id =#{visitId,jdbcType=VARCHAR},
+      visit_times =#{visitTimes,jdbcType=VARCHAR},
+       dept_name = #{deptName,jdbcType=VARCHAR},
+       show_path = #{showPath,jdbcType=VARCHAR},
+       patient_type_code =#{patientTypeCode,jdbcType=VARCHAR},
+        patient_type =#{patientType,jdbcType=VARCHAR},
+       show_type = #{showType,jdbcType=VARCHAR}
+      where pk = #{pk,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateProcInfoByPk">
+        update ${tableName} t set t.status=#{status,jdbcType=VARCHAR}
+        <if test="visitVo.visitId!=null and visitVo.visitId!=''">
+            ,t.VISIT_ID=#{visitVo.visitId,jdbcType=VARCHAR}
+        </if>
+        <if test="visitVo.visitDomainId!=null and visitVo.visitDomainId!=''">
+            ,t.VISIT_DOMAIN=#{visitVo.visitDomainId,jdbcType=VARCHAR}
+        </if>
+        <if test="visitVo.empi!=null and visitVo.empi!=''">
+            ,t.empi=#{visitVo.empi,jdbcType=VARCHAR}
+        </if>
+        <if test="visitVo.encounterId!=null and visitVo.encounterId!=''">
+            ,t.ENCOUNTER_ID=#{visitVo.encounterId,jdbcType=VARCHAR}
+        </if>
+        where t.pk=#{pk,jdbcType=DECIMAL}
+    </update>
+
+    <update id="updateProcInfoByUniqueId">
+        update ${tableName} t
+        set t.status=#{procStatus,jdbcType=VARCHAR}
+        <if test="empi!=null and empi!=''">
+            ,t.empi=#{empi,jdbcType=VARCHAR}
+        </if>
+        <if test="encounterId!=null and encounterId!=''">
+            ,t.ENCOUNTER_ID=#{encounterId,jdbcType=VARCHAR}
+        </if>
+        where t.DOC_PIPELINE_ID=#{uniqueId,jdbcType=DECIMAL}
+        and t.LOAD_TYPE=#{loadType,jdbcType=VARCHAR}
+        AND t.DOC_DOMAIN_ID=#{domainId,jdbcType=VARCHAR}
+        <if test="version!=null">and t.VERSION=#{version,jdbcType=VARCHAR}</if>
+        <if test="version == null">and t.VERSION is null</if>
+        and status=#{status,jdbcType=VARCHAR}
+    </update>
+
+    <select id="querySyncData" resultMap="DataMap">
+        SELECT pk,
+        upload_time,
+        empi,
+        ENCOUNTER_ID,
+        DOC_DOMAIN_ID,
+        VERSION,
+        LOAD_TYPE,
+        DOC_PIPELINE_ID,
+        DOC_EFFECTIVE_TIME,
+        VISIT_DATE,
+        REPORT_TITLE,
+        REPORT_TITLE as xdsNode,
+        PATIENT_NAME,
+        PATIENT_ID,
+        PATIENT_DOMAIN,
+        OUT_PATIENT_ID,
+        INPATIENT,
+        ID_NUM,
+        DOC_CUSTODIAN,
+        DOC_CUSTODIANCODE,
+        '' as DOC_AUTHOR,
+        '' as DOC_AUTHORCODE,
+        DOC_CRYPTOGRAPHIC,
+        DOC_CRYPTOGRAPHICCODE,
+        DOC_EFFECTIVE_TIME,
+        HOSPITAL_CODE,
+        HOSPITAL_NAME,
+        VISIT_ID,VISIT_TIMES,VISIT_DOMAIN,
+        PATIENT_TYPE,PATIENT_TYPECODE,
+        <if test="tableName =='HDSD00_04_01' or tableName =='HDSD00_04_02'">
+            OPEN_DEPT_CODE as DEPT_CODE,OPEN_DEPT_CODE as DEPT_NAME
+        </if>
+        <if test="tableName =='HDSD00_12_01'">
+            DISCHARGE_DEPTCODE as DEPT_CODE,DISCHARGE_DEPT as DEPT_NAME
+        </if>
+        <if test="tableName !='HDSD00_04_01' and tableName !='HDSD00_04_02'  and tableName !='HDSD00_12_01'">
+            DEPT_CODE,DEPT_NAME
+        </if>
+        from ${tableName} where status =#{status,jdbcType=VARCHAR} order by upload_time limit 0,50
+    </select>
+
+</mapper>

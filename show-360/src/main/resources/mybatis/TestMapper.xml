@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.show.dao.TestMapper">
+    <resultMap id="BaesResultMap" type="com.ylz.cdr.show.vo.Hdsd000501Vo">
+        <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP"/>
+        <result column="ENCOUNTER_ID" property="encounterId" jdbcType="VARCHAR"/>
+        <result column="DOC_DOMAIN_ID" property="docDomainId" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="pk" property="pk" jdbcType="INTEGER"/>
+        <result column="empi" property="empi" jdbcType="VARCHAR"/>
+        <result column="WARD_NAME" property="wardName" jdbcType="VARCHAR"/>
+        <result column="WARD_ID" property="wardId" jdbcType="VARCHAR"/>
+        <result column="WARDS_NAME" property="wardsName" jdbcType="VARCHAR"/>
+        <result column="WARDS_ID" property="wardsId" jdbcType="VARCHAR"/>
+        <result column="VERSION" property="version" jdbcType="VARCHAR"/>
+        <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR"/>
+        <result column="TECHNICIAN_NAME" property="technicianName" jdbcType="VARCHAR"/>
+        <result column="TECHNICIAN_CODE" property="technicianCode" jdbcType="VARCHAR"/>
+        <result column="SPECIMEN_NUMBER" property="specimenNumber" jdbcType="VARCHAR"/>
+        <result column="REPOR_CODE" property="reporCode" jdbcType="VARCHAR"/>
+        <result column="REPORT_TITLE" property="reportTitle" jdbcType="VARCHAR"/>
+        <result column="REPORT_RESULT" property="reportResult" jdbcType="VARCHAR"/>
+        <result column="REPORT_REMARK" property="reportRemark" jdbcType="VARCHAR"/>
+        <result column="REPORT_NAME" property="reportName" jdbcType="VARCHAR"/>
+        <result column="REPORT_ID" property="reportId" jdbcType="VARCHAR"/>
+        <result column="REPORT_DEPT" property="reportDept" jdbcType="VARCHAR"/>
+        <result column="REPORT_DATE" property="reportDate" jdbcType="VARCHAR"/>
+        <result column="PATIENT_TYPECODE" property="patientTypecode" jdbcType="VARCHAR"/>
+        <result column="VISIT_TIMES" property="visitTimes" jdbcType="VARCHAR"/>
+        <result column="VISIT_ID" property="visitId" jdbcType="VARCHAR"/>
+        <result column="VISIT_DOMAIN" property="visitDomain" jdbcType="VARCHAR"/>
+        <result column="PATIENT_TYPE" property="patientType" jdbcType="VARCHAR"/>
+        <result column="PATIENT_NAME" property="patientName" jdbcType="VARCHAR"/>
+        <result column="PATIENT_ID" property="patientId" jdbcType="VARCHAR"/>
+        <result column="PATIENT_DOMAIN" property="patientDomain" jdbcType="VARCHAR"/>
+        <result column="OUT_PATIENT_ID" property="outPatientId" jdbcType="VARCHAR"/>
+        <result column="LOAD_TYPE" property="loadType" jdbcType="VARCHAR"/>
+        <result column="INSPECTION_METHOD" property="inspectionMethod" jdbcType="VARCHAR"/>
+        <result column="INSPECTION_CATEGORY" property="inspectionCategory" jdbcType="VARCHAR"/>
+        <result column="INPATIENT" property="inpatient" jdbcType="VARCHAR"/>
+        <result column="ID_NUM" property="idNum" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_NAME" property="hospitalName" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_CODE" property="hospitalCode" jdbcType="VARCHAR"/>
+        <result column="GENDER_CODE" property="genderCode" jdbcType="VARCHAR"/>
+        <result column="EXAMINER_NAME" property="examinerName" jdbcType="VARCHAR"/>
+        <result column="EXAMINER_CODE" property="examinerCode" jdbcType="VARCHAR"/>
+        <result column="DOC_TEMPLATE_OID" property="docTemplateOid" jdbcType="VARCHAR"/>
+        <result column="DOC_REGISTR_MODEL" property="docRegistrModel" jdbcType="VARCHAR"/>
+        <result column="DOC_PIPELINE_ID" property="docPipelineId" jdbcType="VARCHAR"/>
+        <result column="DOC_EFFECTIVE_TIME" property="docEffectiveTime" jdbcType="VARCHAR"/>
+        <result column="DOC_CUSTODIANCODE" property="docCustodiancode" jdbcType="VARCHAR"/>
+        <result column="DOC_CUSTODIAN" property="docCustodian" jdbcType="VARCHAR"/>
+        <result column="DOC_CRYPTOGRAPHICCODE" property="docCryptographiccode" jdbcType="VARCHAR"/>
+        <result column="DOC_CRYPTOGRAPHIC" property="docCryptographic" jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+        <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR"/>
+        <result column="DEPOSITORY_ADDRESS" property="depositoryAddress" jdbcType="VARCHAR"/>
+        <result column="BED_NO" property="bedNo" jdbcType="VARCHAR"/>
+        <result column="BED_NAME" property="bedName" jdbcType="VARCHAR"/>
+        <result column="AUDIT_NAME" property="auditName" jdbcType="VARCHAR"/>
+        <result column="AUDIT_CODE" property="auditCode" jdbcType="VARCHAR"/>
+        <result column="APPY_ID" property="appyId" jdbcType="VARCHAR"/>
+        <result column="APPLY_ORGAN" property="applyOrgan" jdbcType="VARCHAR"/>
+        <result column="APPLY_DEPT_CODE" property="applyDeptCode" jdbcType="VARCHAR"/>
+        <result column="APPLY_DEPT" property="applyDept" jdbcType="VARCHAR"/>
+        <result column="APPLY_AGENCYCODE" property="applyAgencycode" jdbcType="VARCHAR"/>
+        <result column="AGE_UNIT" property="ageUnit" jdbcType="VARCHAR"/>
+        <result column="AGENCY_NAME" property="agencyName" jdbcType="VARCHAR"/>
+        <result column="AGE" property="age" jdbcType="VARCHAR"/>
+        <result column="APPLY_DATE" jdbcType="VARCHAR" property="applyDate"/>
+        <result column="INSPECT_NAME" jdbcType="VARCHAR" property="inspectName"/>
+        <result column="INSPECT_CODE" jdbcType="VARCHAR" property="inspectCode"/>
+        <result column="INSPECTION_CATEGORY_CODE" jdbcType="VARCHAR" property="inspectionCategoryCode"/>
+        <collection property="tdyListTestList" ofType="com.ylz.cdr.bean.TdyListTest" column="id">
+            <result column="SPECIMEN_STATUS" property="specimenStatus" jdbcType="VARCHAR"/>
+            <result column="SPECIMEN_CATEGORY" property="specimenCategory" jdbcType="VARCHAR"/>
+            <result column="SAMPLE_DATE" property="sampleDate" jdbcType="VARCHAR"/>
+            <result column="RESULT_CODE" property="resultCode" jdbcType="VARCHAR"/>
+            <result column="RECEIPT_DATE" property="receiptDate" jdbcType="VARCHAR"/>
+            <result column="QUANTY_RESULT_UNIT" property="quantyResultUnit" jdbcType="VARCHAR"/>
+            <result column="QUANTY_RESULT" property="quantyResult" jdbcType="VARCHAR"/>
+            <result column="ITEM_CODE" property="itemCode" jdbcType="VARCHAR"/>
+            <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR"/>
+            <result column="INSPECT_DATE" property="inspectDate" jdbcType="VARCHAR"/>
+            <result column="item_type_code" property="itemTypeCode" jdbcType="VARCHAR"/>
+            <result column="ref_low_value" property="refLowValue" jdbcType="VARCHAR"/>
+            <result column="ref_high_value" property="refHighValue" jdbcType="VARCHAR"/>
+            <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+            <result column="RESULT_NAME" property="resultName" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <resultMap id="VoResultMap" type="com.ylz.cdr.show.vo.TestCompareVo">
+        <result column="REPORT_DATE" property="reportDate" jdbcType="VARCHAR"/>
+        <collection property="infoList" ofType="com.ylz.cdr.show.vo.TestInfoVo" column="id">
+            <result column="SPECIMEN_STATUS" property="specimenStatus" jdbcType="VARCHAR"/>
+            <result column="SPECIMEN_CATEGORY" property="specimenCategory" jdbcType="VARCHAR"/>
+            <result column="SAMPLE_DATE" property="sampleDate" jdbcType="VARCHAR"/>
+            <result column="RESULT_CODE" property="resultCode" jdbcType="VARCHAR"/>
+            <result column="RESULT_NAME" property="resultName" jdbcType="VARCHAR"/>
+            <result column="RECEIPT_DATE" property="receiptDate" jdbcType="VARCHAR"/>
+            <result column="QUANTY_RESULT_UNIT" property="quantyResultUnit" jdbcType="VARCHAR"/>
+            <result column="QUANTY_RESULT" property="quantyResult" jdbcType="VARCHAR"/>
+            <result column="ITEM_CODE" property="itemCode" jdbcType="VARCHAR"/>
+            <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR"/>
+            <result column="INSPECT_DATE" property="inspectDate" jdbcType="VARCHAR"/>
+            <result column="item_type_code" property="itemTypeCode" jdbcType="VARCHAR"/>
+            <result column="ref_low_value" property="itemMinValue" jdbcType="VARCHAR"/>
+            <result column="ref_high_value" property="itemMaxValue" jdbcType="VARCHAR"/>
+            <result column="ref_unit" property="refUnit" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <select id="getLabResultEncounterListByPersonId" parameterType="java.util.Map"
+            resultType="com.ylz.cdr.show.vo.IndexInfo">
+        select * from (select
+        de.encounter_id as encounterId,
+        date_format(de.visit_date,'%Y-%m-%d') as visitDateTime,
+        de.leave_date as dischargeDateTime,
+        de.hospital_name as orgName,
+        de.visit_dept as deptName
+        FROM patient_visit de
+        where de.encounter_id in(
+        select DISTINCT (ENCOUNTER_ID) from HDSD00_05_01 exam
+        where
+        exam.STATUS='AA'
+        AND exam.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and exam.ENCOUNTER_ID=#{encounterId}
+        </if>
+        ) AND de.global_id=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and de.encounter_id=#{encounterId}
+        </if>
+        group by de.encounter_id,de.visit_date,de.leave_date,de.leave_date,de.hospital_name,de.visit_dept) f
+        ORDER BY f.visitDateTime desc
+    </select>
+
+    <select id="getDCLabResultMasterListByPersonId" parameterType="java.util.Map"
+            resultMap="BaesResultMap">
+        SELECT
+        test.*,tdy.*
+        from HDSD00_05_01 test left join
+        TDY_LIST_TEST tdy on (test.DOC_PIPELINE_ID = tdy.doc_unique and
+        test.DOC_DOMAIN_ID = tdy.doc_domain_id and
+        test.version = tdy.doc_version and
+        test.LOAD_TYPE = tdy.doc_type )
+        WHERE test.STATUS='AA'
+        <if test="encounterId!=null and encounterId!=''">
+            and test.ENCOUNTER_ID=#{encounterId}
+        </if>
+        <if test="personId!=null  and personId!='' ">
+            and test.empi=#{personId}
+        </if>
+        <if test="inspectionCategoryCode!=null and inspectionCategoryCode!=''">
+            and test.INSPECTION_CATEGORY_CODE=#{inspectionCategoryCode}
+        </if>
+        order by test.REPORT_DATE DESC
+        <if test="from >0">
+            LIMIT #{from},#{size}
+        </if>
+    </select>
+
+
+    <select id="getListByPersonIdAndCode" resultMap="VoResultMap">
+        SELECT
+        tdy.*,test.REPORT_DATE
+        from HDSD00_05_01 test left join
+        TDY_LIST_TEST tdy on (test.DOC_PIPELINE_ID = tdy.doc_unique and
+        test.DOC_DOMAIN_ID = tdy.doc_domain_id and
+        test.version = tdy.doc_version and
+        test.LOAD_TYPE = tdy.doc_type )
+        WHERE test.STATUS='AA'
+        and test.empi=#{personId}
+        and test.INSPECTION_CATEGORY_CODE=#{inspectionCategoryCode}
+        order by test.REPORT_DATE DESC
+    </select>
+
+    <select id="countByPersonId" parameterType="java.util.Map"
+            resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        from HDSD00_05_01 test
+        WHERE test.`status` = 'AA'
+        <if test="encounterId!=null and encounterId!=''">
+            and test.ENCOUNTER_ID=#{encounterId}
+        </if>
+        <if test="personId!=null  and personId!='' ">
+            and test.empi=#{personId}
+        </if>
+        <if test="inspectionCategoryCode!=null and inspectionCategoryCode!=''">
+            and test.INSPECTION_CATEGORY_CODE=#{inspectionCategoryCode}
+        </if>
+    </select>
+
+    <select id="countCategory" parameterType="java.util.Map"
+            resultType="com.ylz.cdr.show.vo.TypeInfo">
+        select INSPECTION_CATEGORY_CODE as
+        typeCode,INSPECTION_CATEGORY as typeName,count(INSPECTION_CATEGORY) as total from HDSD00_05_01
+        where STATUS='AA'
+        <if test="personId!=null  and personId!='' ">
+            and empi=#{personId}
+        </if>
+        <if test="encounterId!=null and encounterId!=''">
+            and ENCOUNTER_ID=#{encounterId}
+        </if>
+        GROUP BY INSPECTION_CATEGORY_CODE
+        ORDER BY typeCode
+    </select>
+</mapper>

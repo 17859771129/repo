@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.person.dao.PatientInfoMapper">
+    <select id="queryByInfo" parameterType="com.ylz.person.vo.PatientParam"
+            resultType="com.ylz.person.vo.PatientVo">
+        select p.patient_id as patientId,p.patient_name as patientName,p.telephone as phoneNo,
+        p.identity_no as idNo,p.home_place as address,p.global_id as personId,p.sex as genderName,
+        DATE_FORMAT(p.date_of_birth,'%Y-%m-%d') as dateOfBirth,TIMESTAMPDIFF(YEAR,p.DATE_OF_BIRTH,now()) as age
+        from patient_info p
+        <if test="diagnosis !=null and diagnosis !=''">
+            , (select * from patient_visit where diag_name= #{diagnosis,jdbcType=VARCHAR} or diag_code=
+            #{diagnosis,jdbcType=VARCHAR}) e
+        </if>
+        where 1=1
+        <if test="patientId !=null and patientId !=''">
+            and p.patient_id= #{patientId,jdbcType=VARCHAR}
+        </if>
+        <if test="patientName !=null and patientName !=''">
+            and p.patient_name like CONCAT("%",#{patientName,jdbcType=VARCHAR},"%")
+        </if>
+        <if test="idNo !=null and idNo !=''">
+            and p.identity_no= #{idNo,jdbcType=VARCHAR}
+            and p.certificates_type_code='10'
+        </if>
+        <if test="medRecordNo !=null and medRecordNo !=''">
+            and p.medical_records_number= #{medRecordNo,jdbcType=VARCHAR}
+        </if>
+        <if test="sex !=null and sex !=''">
+            and p.sex= #{sex,jdbcType=VARCHAR}
+        </if>
+        <if test="birthdayBegin !=null and birthdayBegin !=''">
+            and DATE_FORMAT(p.date_of_birth,'%Y-%m-%d')<![CDATA[  > ]]> #{birthdayBegin,jdbcType=VARCHAR}
+        </if>
+        <if test="birthdayEnd !=null and birthdayEnd !=''">
+            and DATE_FORMAT(p.date_of_birth,'%Y-%m-%d')
+            <![CDATA[  <  ]]> #{birthdayEnd,jdbcType=VARCHAR}
+        </if>
+        <if test="diagnosis !=null and diagnosis !=''">
+            and p.global_id=e.global_id
+        </if>
+        LIMIT #{from},#{size}
+    </select>
+
+    <select id="countByInfo" resultType="java.lang.Integer" parameterType="com.ylz.person.vo.PatientParam">
+        select count(*)
+        from patient_info p
+        <if test="diagnosis !=null and diagnosis !=''">
+            ,(select * from patient_visit where diag_name= #{diagnosis,jdbcType=VARCHAR} or diag_code=
+            #{diagnosis,jdbcType=VARCHAR}) e
+        </if>
+        where 1=1
+        <if test="patientId !=null and patientId !=''">
+            and p.patient_id= #{patientId,jdbcType=VARCHAR}
+        </if>
+        <if test="patientName !=null and patientName !=''">
+            and p.patient_name like CONCAT("%",#{patientName,jdbcType=VARCHAR},"%")
+        </if>
+        <if test="idNo !=null and idNo !=''">
+            and p.identity_no= #{idNo,jdbcType=VARCHAR}
+            and p.certificates_type_code='10'
+        </if>
+        <if test="medRecordNo !=null and medRecordNo !=''">
+            and p.medical_records_number= #{medRecordNo,jdbcType=VARCHAR}
+        </if>
+        <if test="sex !=null and sex !=''">
+            and p.sex= #{sex,jdbcType=VARCHAR}
+        </if>
+        <if test="birthdayBegin !=null and birthdayBegin !=''">
+            and DATE_FORMAT(p.date_of_birth,'%Y-%m-%d')<![CDATA[  > ]]> #{birthdayBegin,jdbcType=VARCHAR}
+        </if>
+        <if test="birthdayEnd !=null and birthdayEnd !=''">
+            and DATE_FORMAT(p.date_of_birth,'%Y-%m-%d')
+            <![CDATA[  <  ]]> #{birthdayEnd,jdbcType=VARCHAR}
+        </if>
+        <if test="diagnosis !=null and diagnosis !=''">
+            and p.global_id=e.global_id
+        </if>
+    </select>
+</mapper>

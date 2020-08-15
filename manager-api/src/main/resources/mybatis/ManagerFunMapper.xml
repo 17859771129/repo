@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.manager.dao.ManagerFunMapper">
+    <resultMap id="BaseMap" type="com.ylz.manager.bean.ManagerFun">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="fun_code" property="funCode" jdbcType="VARCHAR"/>
+        <result column="fun_en" property="funEn" jdbcType="VARCHAR"/>
+        <result column="fun_cn" property="funCn" jdbcType="VARCHAR"/>
+        <result column="fun_category" property="funCategory" jdbcType="VARCHAR"/>
+        <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryByRoleId" resultMap="BaseMap">
+        SELECT
+            rf.role_id,rf.fun_code,f.fun_cn,f.fun_category
+        FROM
+            manager_fun f,
+            role_fun rf
+        WHERE
+            rf.fun_code = f.fun_code
+            and rf.role_id=#{roleId,jdbcType=INTEGER} order by f.id
+    </select>
+</mapper>

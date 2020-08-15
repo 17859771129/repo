@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylz.cdr.show.dao.DiagMapper">
+    <resultMap id="DiagMap" type="com.ylz.cdr.show.vo.DiagInfo">
+        <result column="VISIT_DATE" property="visitDate" jdbcType="INTEGER"/>
+        <result column="VISIT_DOCTOR" property="visitDoctor" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_NAME" property="hospitalName" jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+        <result column="diag_code" property="diagCode" jdbcType="VARCHAR"/>
+        <result column="diag_name" property="diagName" jdbcType="VARCHAR"/>
+        <result column="diag_category" property="diagCategory" jdbcType="VARCHAR"/>
+        <result column="DIAG_TYPE" property="diagType" jdbcType="VARCHAR"/>
+        <result column="diag_date" property="diagDate" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="countByPersonId" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) from (select d.visit_date,d.visit_doctor,d.hospital_name,d.visit_dept,d.admit_diagnose_code as
+        diag_code,d.admit_diagnose_name as diag_name,d.admit_date as diag_date,'门诊诊断' as diag_category,'西医' as
+        diag_type,d.encounter_id,d.global_id from patient_visit d where d.admit_diagnose_name is not null
+        union all
+        select d.visit_date,d.visit_doctor,d.hospital_name,d.visit_dept,d.admission_diagnose_code as
+        diag_code,d.admission_diagnose_name as diag_name,d.admission_date as diag_date,'入院诊断' as diag_category,'西医' as
+        diag_type,d.encounter_id,d.global_id from patient_visit d where d.admission_diagnose_name is not null
+        union all
+        select d.visit_date,d.visit_doctor,d.hospital_name,d.visit_dept,d.leave_diagnose_code as
+        diag_code,d.leave_diagnose_name as diag_name,d.leave_date as diag_date,'出院诊断' as diag_category,'西医' as
+        diag_type,d.encounter_id,d.global_id from patient_visit d where d.leave_diagnose_name is not null ) f
+        where f.global_id=#{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and f.ENCOUNTER_ID = #{encounterId}
+        </if>
+    </select>
+
+    <select id="selectVisitList" resultType="com.ylz.cdr.show.vo.IndexInfo">
+        select * from (SELECT
+        de.encounter_id as encounterId,
+        date_format(de.visit_date,'%Y-%m-%d') as visitDateTime,
+        de.leave_date as dischargeDateTime,
+        de.HOSPITAL_NAME as orgName,
+        de.visit_dept as deptName
+        from patient_visit de
+        WHERE de.global_id=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and de.ENCOUNTER_ID=#{encounterId}
+        </if>
+        group by de.ENCOUNTER_ID,de.visit_date,de.leave_date,de.HOSPITAL_NAME,de.visit_dept) f
+        ORDER BY visitDateTime desc
+    </select>
+
+    <select id="getListByPersonId" resultMap="DiagMap" parameterType="java.util.Map">
+        select * from (select d.visit_date,d.visit_doctor,d.hospital_name,d.visit_dept,d.admit_diagnose_code as
+        diag_code,d.admit_diagnose_name as diag_name,d.admit_date as diag_date,'门诊诊断' as diag_category,'西医' as
+        diag_type,d.encounter_id,d.global_id from patient_visit d where d.admit_diagnose_name is not null
+        union all
+        select d.visit_date,d.visit_doctor,d.hospital_name,d.visit_dept,d.admission_diagnose_code as
+        diag_code,d.admission_diagnose_name as diag_name,d.admission_date as diag_date,'入院诊断' as diag_category,'西医' as
+        diag_type,d.encounter_id,d.global_id from patient_visit d where d.admission_diagnose_name is not null
+        union all
+        select d.visit_date,d.visit_doctor,d.hospital_name,d.visit_dept,d.leave_diagnose_code as
+        diag_code,d.leave_diagnose_name as diag_name,d.leave_date as diag_date,'出院诊断' as diag_category,'西医' as
+        diag_type,d.encounter_id,d.global_id from patient_visit d where d.leave_diagnose_name is not null ) f
+        where f.global_id=#{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and f.ENCOUNTER_ID = #{encounterId}
+        </if>
+        order by f.visit_date desc
+        limit #{page},#{size}
+    </select>
+
+    <select id="selectByPatient" resultType="java.lang.String">
+        select d.diag_name from TDY_LIST_DIAG d where d.empi=#{personId}
+        and d.ENCOUNTER_ID = #{encounterId}
+        <if test="encounterType==1">
+            and d.doc_type='C0002'
+        </if>
+        <if test="encounterType==2">
+            and d.doc_type='C0003'
+        </if>
+        <if test="encounterType==3">
+            and d.doc_type in ('C0034','C0032')
+            and d.doc_type in ('出院诊断-主要诊断','出院诊断-其他诊断','确定诊断-西医诊断','确定诊断-中医诊断')
+        </if>
+    </select>
+</mapper>

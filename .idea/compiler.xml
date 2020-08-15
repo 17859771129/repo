@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="monitor-data" />
+        <module name="emr-api" />
+        <module name="write-hf" />
+        <module name="write-360" />
+        <module name="show-hf" />
+        <module name="manager-api" />
+        <module name="sync-data" />
+        <module name="show-360" />
+        <module name="file-api" />
+        <module name="hf-api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cdr-doc" target="1.5" />
+      <module name="emr-api" target="1.5" />
+      <module name="file-api" target="1.5" />
+      <module name="hf-api" target="1.5" />
+      <module name="manager-api" target="1.5" />
+      <module name="monitor-data" target="1.5" />
+      <module name="show-360" target="1.5" />
+      <module name="show-hf" target="1.5" />
+      <module name="sync-data" target="1.5" />
+      <module name="write-360" target="1.5" />
+      <module name="write-hf" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

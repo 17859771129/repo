@@ -1,0 +1,30 @@
+<GetDocumentStroedInfoResponse
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="urn:hl7-org:v3"
+        xsi:schemaLocation="urn:hl7-org:v3 ../multicacheschemas/GetDocumentStroedInfoResponse.xsd"
+        status="${status}">
+    <Id root="${senderDomainId}" extension="${senderId}"/>
+    <TargetId root="${receiveDomainId}" extension="${receiveId}"/>
+    <#if status?? && status == "AA">
+    <DocumentSet>
+        <DocumentUniqueId>${uniqueId}</DocumentUniqueId>
+        <RepositoryUniqueId>${repositoryUniqueId}</RepositoryUniqueId>
+        <DocumentTitle>${title}</DocumentTitle>
+        <CreateTime>${createTime}</CreateTime>
+        <AuthorName>${authorName}</AuthorName>
+        <PatientID>${patientId}</PatientID>
+        <PatientName>${patientName}</PatientName>
+        <ServerOrganization>${serverName}</ServerOrganization>
+        <EpisodeID>${episodeId}</EpisodeID>
+        <InTime>${startTime}</InTime>
+        <OutTime>${endTime}</OutTime>
+        <AdmissionDepart>${deptName}</AdmissionDepart>
+        <AdmissionDoctor>${admissionName}</AdmissionDoctor>
+        <AdmissionType>${admissionType}</AdmissionType>
+        <DiagnosisResult>${diagnosisResult}</DiagnosisResult>
+        <DocUrl>${docUrl}</DocUrl>
+    </DocumentSet>
+    <#else>
+</#if>
+<Detail>${detail}</Detail>
+        </GetDocumentStroedInfoResponse>

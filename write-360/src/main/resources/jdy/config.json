@@ -1,0 +1,46 @@
+{
+  "cdaType": {
+    "C0006": [
+      "BS320",
+      "BS366",
+      "BS368",
+      "BS369"
+    ],
+    "C0007": [
+      "BS319",
+      "BS354",
+      "BS355"
+    ]
+  },
+  "category": {
+    "BS319": {
+      "inspectionCategoryCode": "CG",
+      "inspectionCategory": "普通检验"
+    },
+    "BS354": {
+      "inspectionCategoryCode": "WSW",
+      "inspectionCategory": "微生物检验"
+    },
+    "BS355": {
+      "inspectionCategoryCode": "XTX",
+      "inspectionCategory": "形态学检验"
+    }
+    /*,
+        "BS320":{
+          "code":"JC",
+          "type":"普通检查"
+        },
+        "BS366":{
+          "code":"BL",
+          "type":"病理"
+        },
+        "BS368":{
+          "code":"NJ",
+          "type":"内镜"
+        },
+        "BS369":{
+          "code":"XD",
+          "type":"心电"
+        }*/
+  }
+}

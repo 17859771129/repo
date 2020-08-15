@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.show.dao.ExamMapper">
+
+    <resultMap id="ExamMap" type="com.ylz.cdr.bean.Hdsd000502">
+        <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="pk" jdbcType="INTEGER" property="pk"/>
+        <result column="empi" jdbcType="VARCHAR" property="empi"/>
+        <result column="ENCOUNTER_ID" jdbcType="VARCHAR" property="encounterId"/>
+        <result column="DOC_DOMAIN_ID" jdbcType="VARCHAR" property="docDomainId"/>
+        <result column="WARD_NAME" jdbcType="VARCHAR" property="wardName"/>
+        <result column="WARD_ID" jdbcType="VARCHAR" property="wardId"/>
+        <result column="WARDS_NAME" jdbcType="VARCHAR" property="wardsName"/>
+        <result column="WARDS_ID" jdbcType="VARCHAR" property="wardsId"/>
+        <result column="VERSION" jdbcType="VARCHAR" property="version"/>
+        <result column="TREATMENT_PROCESS" jdbcType="VARCHAR" property="treatmentProcess"/>
+        <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone"/>
+        <result column="TECHNICIAN_NAME" jdbcType="VARCHAR" property="technicianName"/>
+        <result column="TECHNICIAN_CODE" jdbcType="VARCHAR" property="technicianCode"/>
+        <result column="SYMPTOM_STOPPING_DATE" jdbcType="VARCHAR" property="symptomStoppingDate"/>
+        <result column="SYMPTOM_START_DATE" jdbcType="VARCHAR" property="symptomStartDate"/>
+        <result column="SYMPTOM_DESCRIPTION" jdbcType="VARCHAR" property="symptomDescription"/>
+        <result column="SUBJECTIVE_TIP" jdbcType="VARCHAR" property="subjectiveTip"/>
+        <result column="SPECIMEN_NUMBER" jdbcType="VARCHAR" property="specimenNumber"/>
+        <result column="SPECIAL_EXAM_MARK" jdbcType="VARCHAR" property="specialExamMark"/>
+        <result column="REPOR_CODE" jdbcType="VARCHAR" property="reporCode"/>
+        <result column="REPORT_TITLE" jdbcType="VARCHAR" property="reportTitle"/>
+        <result column="REPORT_REMARK" jdbcType="VARCHAR" property="reportRemark"/>
+        <result column="REPORT_NAME" jdbcType="VARCHAR" property="reportName"/>
+        <result column="REPORT_ID" jdbcType="VARCHAR" property="reportId"/>
+        <result column="REPORT_DEPT" jdbcType="VARCHAR" property="reportDept"/>
+        <result column="REPORT_DATE" jdbcType="VARCHAR" property="reportDate"/>
+        <result column="PATIENT_TYPECODE" jdbcType="VARCHAR" property="patientTypecode"/>
+        <result column="VISIT_TIMES" jdbcType="VARCHAR" property="visitTimes"/>
+        <result column="VISIT_ID" jdbcType="VARCHAR" property="visitId"/>
+        <result column="VISIT_DOMAIN" jdbcType="VARCHAR" property="visitDomain"/>
+        <result column="PATIENT_TYPE" jdbcType="VARCHAR" property="patientType"/>
+        <result column="PATIENT_NAME" jdbcType="VARCHAR" property="patientName"/>
+        <result column="PATIENT_ID" jdbcType="VARCHAR" property="patientId"/>
+        <result column="PATIENT_DOMAIN" jdbcType="VARCHAR" property="patientDomain"/>
+        <result column="OUT_PATIENT_ID" jdbcType="VARCHAR" property="outPatientId"/>
+        <result column="OBJECTIVE_OBSERVATION" jdbcType="VARCHAR" property="objectiveObservation"/>
+        <result column="LOAD_TYPE" jdbcType="VARCHAR" property="loadType"/>
+        <result column="INPATIENT" jdbcType="VARCHAR" property="inpatient"/>
+        <result column="ID_NUM" jdbcType="VARCHAR" property="idNum"/>
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName"/>
+        <result column="HOSPITAL_CODE" jdbcType="VARCHAR" property="hospitalCode"/>
+        <result column="GENDER_CODE" jdbcType="VARCHAR" property="genderCode"/>
+        <result column="DOC_TEMPLATE_OID" jdbcType="VARCHAR" property="docTemplateOid"/>
+        <result column="DOC_REGISTR_MODEL" jdbcType="VARCHAR" property="docRegistrModel"/>
+        <result column="DOC_PIPELINE_ID" jdbcType="VARCHAR" property="docPipelineId"/>
+        <result column="DOC_EFFECTIVE_TIME" jdbcType="VARCHAR" property="docEffectiveTime"/>
+        <result column="DOC_CUSTODIANCODE" jdbcType="VARCHAR" property="docCustodiancode"/>
+        <result column="DOC_CUSTODIAN" jdbcType="VARCHAR" property="docCustodian"/>
+        <result column="DOC_CRYPTOGRAPHICCODE" jdbcType="VARCHAR" property="docCryptographiccode"/>
+        <result column="DOC_CRYPTOGRAPHIC" jdbcType="VARCHAR" property="docCryptographic"/>
+        <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+        <result column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode"/>
+        <result column="DEPOSITORY_ADDRESS" jdbcType="VARCHAR" property="depositoryAddress"/>
+        <result column="CHIEF_COMPLAINT" jdbcType="VARCHAR" property="chiefComplaint"/>
+        <result column="CHECK_NAME" jdbcType="VARCHAR" property="checkName"/>
+        <result column="CHECK_METHOD" jdbcType="VARCHAR" property="checkMethod"/>
+        <result column="CHECK_CODE" jdbcType="VARCHAR" property="checkCode"/>
+        <result column="CHECK_CATEGORY" jdbcType="VARCHAR" property="checkCategory"/>
+        <result column="BED_NO" jdbcType="VARCHAR" property="bedNo"/>
+        <result column="BED_NAME" jdbcType="VARCHAR" property="bedName"/>
+        <result column="AUDIT_NAME" jdbcType="VARCHAR" property="auditName"/>
+        <result column="AUDIT_CODE" jdbcType="VARCHAR" property="auditCode"/>
+        <result column="APPY_ID" jdbcType="VARCHAR" property="appyId"/>
+        <result column="APPLY_ORGAN" jdbcType="VARCHAR" property="applyOrgan"/>
+        <result column="APPLY_DEPT_CODE" jdbcType="VARCHAR" property="applyDeptCode"/>
+        <result column="APPLY_DEPT" jdbcType="VARCHAR" property="applyDept"/>
+        <result column="APPLY_AGENCYCODE" jdbcType="VARCHAR" property="applyAgencycode"/>
+        <result column="AGE_UNIT" jdbcType="VARCHAR" property="ageUnit"/>
+        <result column="AGENCY_NAME" jdbcType="VARCHAR" property="agencyName"/>
+        <result column="AGE" jdbcType="VARCHAR" property="age"/>
+        <result column="VISIT_DATE" jdbcType="VARCHAR" property="visitDate"/>
+        <result column="INTERVENTION" jdbcType="VARCHAR" property="intervention"/>
+        <result column="OPER_NAME" jdbcType="VARCHAR" property="operName"/>
+        <result column="OPER_PART_CODE" jdbcType="VARCHAR" property="operPartCode"/>
+        <result column="OPER_DATE" jdbcType="VARCHAR" property="operDate"/>
+        <result column="OPER_CODE" jdbcType="VARCHAR" property="operCode"/>
+        <result column="QUANTY_RESULT_UNIT" jdbcType="VARCHAR" property="quantyResultUnit"/>
+        <result column="QUANTY_RESULT" jdbcType="VARCHAR" property="quantyResult"/>
+        <result column="RESULT_CODE" jdbcType="VARCHAR" property="resultCode"/>
+        <result column="SPECIMEN_FIXATIVE" jdbcType="VARCHAR" property="specimenFixative"/>
+        <result column="SPECIMEN_STATUS" jdbcType="VARCHAR" property="specimenStatus"/>
+        <result column="SPECIMEN_CATEGORY" jdbcType="VARCHAR" property="specimenCategory"/>
+        <result column="RECEIPT_DATE" jdbcType="VARCHAR" property="receiptDate"/>
+        <result column="SAMPLE_DATE" jdbcType="VARCHAR" property="sampleDate"/>
+        <result column="ITEM_CODE" jdbcType="VARCHAR" property="itemCode"/>
+        <result column="CHECK_DATE" jdbcType="VARCHAR" property="checkDate"/>
+        <result column="ANESTH_WESTERN_SIGN" jdbcType="VARCHAR" property="anesthWesternSign"/>
+        <result column="ANES_OBS" jdbcType="VARCHAR" property="anesObs"/>
+        <result column="ANESTH_NAME" jdbcType="VARCHAR" property="anesthName"/>
+        <result column="ANES_METHOD_CODE" jdbcType="VARCHAR" property="anesMethodCode"/>
+        <result column="OPER_NUM" jdbcType="VARCHAR" property="operNum"/>
+        <result column="OPER_METHOD" jdbcType="VARCHAR" property="operMethod"/>
+        <result column="ITEM_NAME" jdbcType="VARCHAR" property="itemName"/>
+        <result column="CHECK_CATEGORY_CODE" jdbcType="VARCHAR" property="checkCategoryCode"/>
+        <result column="GENDER" jdbcType="VARCHAR" property="gender"/>
+        <result column="OPER_PART_NAME" jdbcType="VARCHAR" property="operPartName"/>
+        <result column="ANES_METHOD_NAME" jdbcType="VARCHAR" property="anesMethodName"/>
+        <result column="ANESTH_WESTERN" jdbcType="VARCHAR" property="anesthWestern"/>
+        <result column="RESULT_NAME" jdbcType="VARCHAR" property="resultName"/>
+        <result column="AUDIT_SIGNDATE" jdbcType="VARCHAR" property="auditSigndate"/>
+        <result column="CHECK_SIGNDATE" jdbcType="VARCHAR" property="checkSigndate"/>
+        <result column="TECHNICIAN_SIGNDATE" jdbcType="VARCHAR" property="technicianSigndate"/>
+        <result column="APPLY_DATE" jdbcType="VARCHAR" property="applyDate"/>
+    </resultMap>
+
+    <select id="getExamEncountersByPersonId" resultType="com.ylz.cdr.show.vo.IndexInfo">
+        select * from (SELECT
+        de.encounter_id as encounterId,
+        date_format(de.visit_date,'%Y-%m-%d') as visitDateTime,
+        de.leave_date as dischargeDateTime,
+        de.hospital_name as orgName,
+        de.visit_dept as deptName
+        FROM patient_visit de
+        where de.encounter_id in(
+        select DISTINCT (ENCOUNTER_ID) from HDSD00_05_02 exam
+        where
+        exam.STATUS='AA'
+        AND exam.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and exam.ENCOUNTER_ID=#{encounterId}
+        </if>
+        ) AND de.global_id=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and de.encounter_id=#{encounterId}
+        </if>
+        group by de.encounter_id,de.visit_date,de.leave_date,de.leave_date,de.hospital_name,de.visit_dept) f
+        ORDER BY f.visitDateTime desc
+    </select>
+
+    <select id="getExamResultsByPersonId" resultMap="ExamMap">
+        SELECT
+        exam.*
+        from HDSD00_05_02 exam
+        where exam.STATUS='AA' and exam.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and exam.ENCOUNTER_ID=#{encounterId}
+        </if>
+        <if test="categoryCode!=null and categoryCode!=''">
+            and exam.CHECK_CATEGORY_CODE=#{categoryCode}
+        </if>
+        ORDER BY exam.REPORT_DATE desc
+        <if test="from >0">
+            LIMIT #{from},#{size}
+        </if>
+    </select>
+
+    <select id="countByPersonId" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        from HDSD00_05_02 exam
+        where exam.STATUS='AA' and exam.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and exam.ENCOUNTER_ID=#{encounterId}
+        </if>
+        <if test="categoryCode!=null and categoryCode!=''">
+            and exam.CHECK_CATEGORY_CODE=#{categoryCode}
+        </if>
+    </select>
+
+    <select id="getExamCategorysByPersonIdAndEncounterId" resultType="com.ylz.cdr.show.vo.TypeInfo">
+        select CHECK_CATEGORY_CODE as typeCode,CHECK_CATEGORY as typeName,count(CHECK_CATEGORY) as total
+        from HDSD00_05_02
+        where STATUS='AA'
+        <if test="personId!=null  and personId!='' ">
+            and empi=#{personId}
+        </if>
+        <if test="encounterId!=null and encounterId!=''">
+            and ENCOUNTER_ID=#{encounterId}
+        </if>
+        GROUP BY CHECK_CATEGORY_CODE,CHECK_CATEGORY
+    </select>
+
+    <select id="getExamResultComparisonByPersonIdAndcategoryCode"
+            resultMap="ExamMap">
+        SELECT *
+        from HDSD00_05_02
+        where STATUS='AA'
+        <if test="personId!=null  and personId!='' ">
+            and empi=#{personId}
+        </if>
+        <if test="categoryCode!=null and categoryCode!=''">
+            and CHECK_CATEGORY_CODE=#{categoryCode}
+        </if>
+        ORDER BY REPORT_DATE desc
+        LIMIT 0,#{row}
+    </select>
+</mapper>

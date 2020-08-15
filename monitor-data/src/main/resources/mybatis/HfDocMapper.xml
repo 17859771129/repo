@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.hf.monitor.mapper.HfDocMapper">
+
+    <select id="getCountDocCategoriesByInterval" parameterType="com.ylz.hf.monitor.daoDto.HfDocDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfDocDTO">
+        select COUNT(*) as countNumber
+        from hf_doc_index i,manager_doc d
+        where d.doc_category=#{hfDocDTO.docCategory}
+        and d.doc_code=i.xds_type
+        and i.proc_status='AA'
+        <if test="hfDocDTO.endProcTime!=null and hfDocDTO.startProcTime!=null ">
+            <![CDATA[
+        and i.proc_time >  #{hfDocDTO.startProcTime}
+		and i.proc_time <= #{hfDocDTO.endProcTime}
+		]]>
+        </if>
+    </select>
+
+
+    <select id="getCountCategoryByServe" parameterType="com.ylz.hf.monitor.daoDto.HfDocDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfDocDTO">
+        select COUNT(*) as countNumber
+        from
+        hf_access_log a,
+        manager_doc d,
+        hf_doc_index i
+        where d.doc_category=#{hfDocDTO.docCategory}
+        and d.doc_code=i.xds_type
+        and i.repository_unique_id=a.repository_unique_id
+    </select>
+
+
+    <select id="getCountDocCategoriesTops" parameterType="com.ylz.hf.monitor.daoDto.HfDocDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfAccessLogDTO">
+        select a.domain_id as domainId,
+        COUNT(a.domain_id) as countNumber
+        from
+        hf_access_log a,
+        manager_doc d,
+        hf_doc_index i
+        where d.doc_category=#{hfDocDTO.docCategory}
+        and d.doc_code=i.xds_type
+        and i.repository_unique_id=a.repository_unique_id
+
+        <if test="hfDocDTO.endProcTime!=null and hfDocDTO.startProcTime!=null ">
+            <![CDATA[
+        and a.proc_time >  #{hfDocDTO.startProcTime}
+		and a.proc_time <= #{hfDocDTO.endProcTime}
+		]]>
+        </if>
+        group by a.domain_id
+    </select>
+
+
+    <select id="getCountDocCategories" parameterType="com.ylz.hf.monitor.daoDto.HfDocDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfAccessLogDTO">
+        select a.domain_id as domainId,
+        COUNT(a.domain_id) as countNumber
+        from
+        hf_access_log a,
+        manager_doc d,
+        hf_doc_index i
+        where d.doc_category=#{hfDocDTO.docCategory}
+        and d.doc_code=i.xds_type
+        and i.repository_unique_id=a.repository_unique_id
+
+        <if test="hfDocDTO.endProcTime!=null and hfDocDTO.startProcTime!=null ">
+            <![CDATA[
+        and a.proc_time >  #{hfDocDTO.startProcTime}
+		and a.proc_time <= #{hfDocDTO.endProcTime}
+		]]>
+        </if>
+        group by a.domain_id
+    </select>
+
+
+</mapper>

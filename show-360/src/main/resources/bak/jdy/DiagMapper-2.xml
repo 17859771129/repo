@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylz.cdr.show.dao.DiagMapper">
+    <resultMap id="DiagMap" type="com.ylz.cdr.show.vo.DiagInfo">
+        <result column="VISIT_DATE" property="visitDate" jdbcType="INTEGER"/>
+        <result column="VISIT_DOCTOR" property="visitDoctor" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_NAME" property="hospitalName" jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+        <result column="diag_code" property="diagCode" jdbcType="VARCHAR"/>
+        <result column="diag_name" property="diagName" jdbcType="VARCHAR"/>
+        <result column="diag_category" property="diagCategory" jdbcType="VARCHAR"/>
+        <result column="DIAG_TYPE" property="diagType" jdbcType="VARCHAR"/>
+        <result column="diag_date" property="diagDate" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="countByPersonId" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) from (select STATUS,VISIT_DATE,VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'门诊诊断' from
+        HDSD00_03_02
+        union all
+        select STATUS,RECORD_DATE as VISIT_DATE,VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'急诊诊断' from
+        HDSD00_03_01
+        union all
+        select STATUS,ADMISSION_DATE as VISIT_DATE,ATTENDING_NAME as
+        VISIT_DOCTOR,HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'入院诊断'
+        from HDSD00_13_02
+        union all
+        select STATUS,DISCHARGE_DATE as VISIT_DATE,ATTENDING_NAME as VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'出院诊断' from
+        HDSD00_14_11
+        union all
+        select STATUS,DEATH_DATE as VISIT_DATE,ATTENDING_NAME as VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'死亡诊断' from
+        HDSD00_14_16 ) a
+        left join TDY_LIST_DIAG d on a.VERSION=d.doc_version and d.doc_type=a.LOAD_TYPE and
+        d.doc_unique=a.DOC_PIPELINE_ID
+        and d.doc_domain_id=a.DOC_DOMAIN_ID where a.STATUS='AA'
+        and a.empi=#{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and a.ENCOUNTER_ID = #{encounterId}
+        </if>
+    </select>
+
+    <select id="selectVisitList" resultType="com.ylz.cdr.show.vo.IndexInfo">
+        select * from (SELECT
+        a.encounter_id as encounterId,
+        date_format(de.visit_date,'%Y-%m-%d') as visitDateTime,
+        de.leave_date as dischargeDateTime,
+        a.HOSPITAL_NAME as orgName,
+        a.DEPT_NAME as deptName
+        from (select STATUS,VISIT_DATE,VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'门诊诊断' as
+        diag_category from
+        HDSD00_03_02
+        union all
+        select STATUS,RECORD_DATE as VISIT_DATE,VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'急诊诊断' as
+        diag_category from
+        HDSD00_03_01
+        union all
+        select STATUS,ADMISSION_DATE as VISIT_DATE,ATTENDING_NAME as
+        VISIT_DOCTOR,HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'入院诊断' as
+        diag_category
+        from HDSD00_13_02
+        union all
+        select STATUS,DISCHARGE_DATE as VISIT_DATE,ATTENDING_NAME as VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'出院诊断' as
+        diag_category from
+        HDSD00_14_11
+        union all
+        select STATUS,DEATH_DATE as VISIT_DATE,ATTENDING_NAME as VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'死亡诊断' as
+        diag_category from
+        HDSD00_14_16 ) a
+        LEFT JOIN patient_visit de ON a.ENCOUNTER_ID = de.ENCOUNTER_ID
+        WHERE
+        a.STATUS='AA'
+        AND a.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and a.ENCOUNTER_ID=#{encounterId}
+        </if>
+        group by a.encounter_id,de.visit_date,de.leave_date,a.HOSPITAL_NAME,a.DEPT_NAME) f
+        ORDER BY visitDateTime desc
+    </select>
+
+    <select id="getListByPersonId" resultMap="DiagMap" parameterType="java.util.Map">
+        select a.*,d.diag_name,d.diag_code,d.DIAG_TYPE,d.diag_date from (select
+        STATUS,VISIT_DATE,VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'门诊诊断' as
+        diag_category from
+        HDSD00_03_02
+        union all
+        select STATUS,RECORD_DATE as VISIT_DATE,VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'急诊诊断' as
+        diag_category from
+        HDSD00_03_01
+        union all
+        select STATUS,ADMISSION_DATE as VISIT_DATE,ATTENDING_NAME as
+        VISIT_DOCTOR,HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'入院诊断' as
+        diag_category
+        from HDSD00_13_02
+        union all
+        select STATUS,DISCHARGE_DATE as VISIT_DATE,ATTENDING_NAME as VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'出院诊断' as
+        diag_category from
+        HDSD00_14_11
+        union all
+        select STATUS,DEATH_DATE as VISIT_DATE,ATTENDING_NAME as VISIT_DOCTOR,HOSPITAL_NAME as
+        HOSPITAL_NAME,DEPT_NAME,ENCOUNTER_ID,empi,DOC_DOMAIN_ID,VERSION,LOAD_TYPE,DOC_PIPELINE_ID,'死亡诊断' as
+        diag_category from
+        HDSD00_14_16 ) a
+        left join TDY_LIST_DIAG d on a.VERSION=d.doc_version and d.doc_type=a.LOAD_TYPE and
+        d.doc_unique=a.DOC_PIPELINE_ID
+        and d.doc_domain_id=a.DOC_DOMAIN_ID
+        where a.STATUS='AA'
+        and a.empi=#{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and a.ENCOUNTER_ID = #{encounterId}
+        </if>
+        order by a.ENCOUNTER_ID desc
+        limit #{page},#{size}
+    </select>
+
+    <select id="selectByPatient" resultType="java.lang.String">
+        select d.diag_name from TDY_LIST_DIAG d where d.empi=#{personId}
+        and d.ENCOUNTER_ID = #{encounterId}
+        <if test="encounterType==1">
+            and d.doc_type='C0002'
+        </if>
+        <if test="encounterType==2">
+            and d.doc_type='C0003'
+        </if>
+        <if test="encounterType==3">
+            and d.doc_type in ('C0034','C0032')
+            and d.doc_type in ('出院诊断-主要诊断','出院诊断-其他诊断','确定诊断-西医诊断','确定诊断-中医诊断')
+        </if>
+    </select>
+</mapper>

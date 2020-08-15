@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/emr-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/file-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hf-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manager-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/monitor-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/show-360" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/show-hf" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sync-data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/write-360" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/write-hf" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.show.dao.OperMapper">
+
+    <resultMap id="OperMap" type="com.ylz.cdr.bean.Hdsd000606">
+        <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="pk" jdbcType="INTEGER" property="pk"/>
+        <result column="empi" jdbcType="VARCHAR" property="empi"/>
+        <result column="ENCOUNTER_ID" jdbcType="VARCHAR" property="encounterId"/>
+        <result column="DOC_DOMAIN_ID" jdbcType="VARCHAR" property="docDomainId"/>
+        <result column="WARD_NAME" jdbcType="VARCHAR" property="wardName"/>
+        <result column="WARD_ID" jdbcType="VARCHAR" property="wardId"/>
+        <result column="WARDS_NAME" jdbcType="VARCHAR" property="wardsName"/>
+        <result column="WARDS_ID" jdbcType="VARCHAR" property="wardsId"/>
+        <result column="VISIT_DATE" jdbcType="VARCHAR" property="visitDate"/>
+        <result column="VERSION" jdbcType="VARCHAR" property="version"/>
+        <result column="TARGET_NAME" jdbcType="VARCHAR" property="targetName"/>
+        <result column="SURGERY_HISTORY" jdbcType="VARCHAR" property="surgeryHistory"/>
+        <result column="SURGEON_SIGNDATE" jdbcType="VARCHAR" property="surgeonSigndate"/>
+        <result column="SURGEON_CODE" jdbcType="VARCHAR" property="surgeonCode"/>
+        <result column="SKIN_DISINFECTION" jdbcType="VARCHAR" property="skinDisinfection"/>
+        <result column="REPORT_TITLE" jdbcType="VARCHAR" property="reportTitle"/>
+        <result column="PLACEMENT_SITE" jdbcType="VARCHAR" property="placementSite"/>
+        <result column="PATIENT_NAME" jdbcType="VARCHAR" property="patientName"/>
+        <result column="PATIENT_TYPE" jdbcType="VARCHAR" property="patientType"/>
+        <result column="PATIENT_TYPECODE" jdbcType="VARCHAR" property="patientTypecode"/>
+        <result column="VISIT_TIMES" jdbcType="VARCHAR" property="visitTimes"/>
+        <result column="VISIT_ID" jdbcType="VARCHAR" property="visitId"/>
+        <result column="VISIT_DOMAIN" jdbcType="VARCHAR" property="visitDomain"/>
+        <result column="PATIENT_ID" jdbcType="VARCHAR" property="patientId"/>
+        <result column="PATIENT_DOMAIN" jdbcType="VARCHAR" property="patientDomain"/>
+        <result column="OUT_PATIENT_ID" jdbcType="VARCHAR" property="outPatientId"/>
+        <result column="OPER_POST_CODE" jdbcType="VARCHAR" property="operPostCode"/>
+        <result column="OPER_POST" jdbcType="VARCHAR" property="operPost"/>
+        <result column="OPERATION_DESC" jdbcType="VARCHAR" property="operationDesc"/>
+        <result column="LOAD_TYPE" jdbcType="VARCHAR" property="loadType"/>
+        <result column="INTERVENTION" jdbcType="VARCHAR" property="intervention"/>
+        <result column="INPATIENT" jdbcType="VARCHAR" property="inpatient"/>
+        <result column="INFUSION_VOLUME" jdbcType="VARCHAR" property="infusionVolume"/>
+        <result column="INCISION_DESC" jdbcType="VARCHAR" property="incisionDesc"/>
+        <result column="ID_NUM" jdbcType="VARCHAR" property="idNum"/>
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName"/>
+        <result column="HOSPITAL_CODE" jdbcType="VARCHAR" property="hospitalCode"/>
+        <result column="GENDER_CODE" jdbcType="VARCHAR" property="genderCode"/>
+        <result column="GENDER" jdbcType="VARCHAR" property="gender"/>
+        <result column="DRAINAGE_MATERIAL_NUM" jdbcType="VARCHAR" property="drainageMaterialNum"/>
+        <result column="DRAINAGE_MATERIAL" jdbcType="VARCHAR" property="drainageMaterial"/>
+        <result column="DRAINAGE_MARK" jdbcType="VARCHAR" property="drainageMark"/>
+        <result column="DOC_WRITING_TIME" jdbcType="VARCHAR" property="docWritingTime"/>
+        <result column="DOC_TEMPLATE_OID" jdbcType="VARCHAR" property="docTemplateOid"/>
+        <result column="DOC_REGISTR_MODEL" jdbcType="VARCHAR" property="docRegistrModel"/>
+        <result column="DOC_PIPELINE_ID" jdbcType="VARCHAR" property="docPipelineId"/>
+        <result column="DOC_EFFECTIVE_TIME" jdbcType="VARCHAR" property="docEffectiveTime"/>
+        <result column="DOC_CUSTODIANCODE" jdbcType="VARCHAR" property="docCustodiancode"/>
+        <result column="DOC_CUSTODIAN" jdbcType="VARCHAR" property="docCustodian"/>
+        <result column="DOC_CRYPTOGRAPHICCODE" jdbcType="VARCHAR" property="docCryptographiccode"/>
+        <result column="DOC_CRYPTOGRAPHIC" jdbcType="VARCHAR" property="docCryptographic"/>
+        <result column="DOC_AUTHORCODE" jdbcType="VARCHAR" property="docAuthorcode"/>
+        <result column="DOC_AUTHOR" jdbcType="VARCHAR" property="docAuthor"/>
+        <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+        <result column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode"/>
+        <result column="BLOOD_VOLUME" jdbcType="VARCHAR" property="bloodVolume"/>
+        <result column="BLOOD_REACTION_MARK" jdbcType="VARCHAR" property="bloodReactionMark"/>
+        <result column="BLEEDING" jdbcType="VARCHAR" property="bleeding"/>
+        <result column="BED_NO" jdbcType="VARCHAR" property="bedNo"/>
+        <result column="BED_NAME" jdbcType="VARCHAR" property="bedName"/>
+        <result column="APPY_ID" jdbcType="VARCHAR" property="appyId"/>
+        <result column="ANES_METHOD_NAME" jdbcType="VARCHAR" property="anesMethodName"/>
+        <result column="ANES_METHOD_CODE" jdbcType="VARCHAR" property="anesMethodCode"/>
+        <result column="ANESTH_NAME" jdbcType="VARCHAR" property="anesthName"/>
+        <result column="AGE_UNIT" jdbcType="VARCHAR" property="ageUnit"/>
+        <result column="AGE" jdbcType="VARCHAR" property="age"/>
+        <result column="INOPER_MEDICAL" jdbcType="VARCHAR" property="inoperMedical"/>
+        <result column="PRE_MEDICATION" jdbcType="VARCHAR" property="preMedication"/>
+        <result column="OPER_LEVEL" jdbcType="VARCHAR" property="operLevel"/>
+        <result column="OPER_LEVEL_CODE" jdbcType="VARCHAR" property="operLevelCode"/>
+        <result column="OPER_ROOM" jdbcType="VARCHAR" property="operRoom"/>
+        <result column="OPER_NAME" jdbcType="VARCHAR" property="operName"/>
+        <result column="PATROL_NAME" jdbcType="VARCHAR" property="patrolName"/>
+        <result column="PATROL_CODE" jdbcType="VARCHAR" property="patrolCode"/>
+        <result column="INSTRUMENT_NAME" jdbcType="VARCHAR" property="instrumentName"/>
+        <result column="INSTRUMENT_CODE" jdbcType="VARCHAR" property="instrumentCode"/>
+        <result column="ASSISTANT_II" jdbcType="VARCHAR" property="assistantIi"/>
+        <result column="ASSISTANT_IICODE" jdbcType="VARCHAR" property="assistantIicode"/>
+        <result column="ASSISTANT_I" jdbcType="VARCHAR" property="assistantI"/>
+        <result column="ASSISTANT_ICODE" jdbcType="VARCHAR" property="assistantIcode"/>
+        <result column="SURGEON_NAME" jdbcType="VARCHAR" property="surgeonName"/>
+        <result column="OPER_END_DATE" jdbcType="VARCHAR" property="operEndDate"/>
+        <result column="OPER_START_DATE" jdbcType="VARCHAR" property="operStartDate"/>
+        <result column="OPER_CODE" jdbcType="VARCHAR" property="operCode"/>
+    </resultMap>
+
+    <select id="getVisitListByPersonId" parameterType="java.util.Map" resultType="com.ylz.cdr.show.vo.IndexInfo">
+        select * from (select
+        de.encounter_id as encounterId,
+        date_format(de.visit_date,'%Y-%m-%d') as visitDateTime,
+        de.leave_date as dischargeDateTime,
+        de.hospital_name as orgName,
+        de.visit_dept as deptName
+        FROM patient_visit de
+        where de.encounter_id in(
+        select DISTINCT (ENCOUNTER_ID) from HDSD00_06_06 exam
+        where
+        exam.STATUS='AA'
+        AND exam.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and exam.ENCOUNTER_ID=#{encounterId}
+        </if>
+        ) AND de.global_id=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and de.encounter_id=#{encounterId}
+        </if>
+        group by de.encounter_id,de.visit_date,de.leave_date,de.leave_date,de.hospital_name,de.visit_dept) f
+        ORDER BY f.visitDateTime desc
+    </select>
+
+    <select id="getOperByPersonId" parameterType="java.util.Map"
+            resultMap="OperMap">
+        SELECT oper.*
+        from HDSD00_06_06 oper
+        where oper.STATUS='AA'
+        and oper.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and oper.ENCOUNTER_ID=#{encounterId}
+        </if>
+        <if test="from >0">
+            LIMIT #{from},#{size}
+        </if>
+    </select>
+
+    <select id="countByPersonId" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*)
+        from HDSD00_06_06 oper
+        where
+        oper.STATUS='AA'
+        and oper.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and oper.ENCOUNTER_ID=#{encounterId}
+        </if>
+    </select>
+
+    <select id="getDiagList" parameterType="java.util.Map" resultType="com.ylz.cdr.bean.TdyListDiag">
+        select diag_code as diagCode,diag_name as diagName,DIAG_TYPE as diagType from TDY_LIST_DIAG tdy
+        where tdy.doc_unique =#{docUnique} and
+        tdy.doc_domain_id=#{docDomain}
+        and (tdy.DIAG_TYPE='术前诊断' or tdy.DIAG_TYPE='术后诊断')
+        and tdy.doc_version =#{docVersion}
+        and tdy.doc_type =#{docType}
+    </select>
+</mapper>

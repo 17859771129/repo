@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.show.dao.LabCompareMapper">
+    <resultMap id="BaseResultMap" type="com.ylz.cdr.lab.bean.LabIndexCompare">
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="INSPECT_DATE" property="inspectDate" jdbcType="VARCHAR"/>
+        <result column="item_type_code" property="itemTypeCode" jdbcType="VARCHAR"/>
+        <result column="item_min_value" property="itemMinValue" jdbcType="VARCHAR"/>
+        <result column="item_max_value" property="itemMaxValue" jdbcType="VARCHAR"/>
+        <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+        <result column="is_compare" property="isCompare" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="VoResultMap" type="com.ylz.cdr.show.vo.TestInfoVo">
+        <result column="SPECIMEN_STATUS" property="specimenStatus" jdbcType="VARCHAR"/>
+        <result column="SPECIMEN_CATEGORY" property="specimenCategory" jdbcType="VARCHAR"/>
+        <result column="SAMPLE_DATE" property="sampleDate" jdbcType="VARCHAR"/>
+        <result column="RESULT_CODE" property="resultCode" jdbcType="VARCHAR"/>
+        <result column="RECEIPT_DATE" property="receiptDate" jdbcType="VARCHAR"/>
+        <result column="QUANTY_RESULT_UNIT" property="quantyResultUnit" jdbcType="VARCHAR"/>
+        <result column="QUANTY_RESULT" property="quantyResult" jdbcType="VARCHAR"/>
+        <result column="ITEM_CODE" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="INSPECT_DATE" property="inspectDate" jdbcType="VARCHAR"/>
+        <result column="item_type_code" property="itemTypeCode" jdbcType="VARCHAR"/>
+        <result column="item_min_value" property="itemMinValue" jdbcType="VARCHAR"/>
+        <result column="item_max_value" property="itemMaxValue" jdbcType="VARCHAR"/>
+        <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+        <result column="is_compare" property="isCompare" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryData" resultMap="BaseResultMap">
+        select * from lab_index_compare f
+        WHERE f.empi = #{empi,jdbcType=VARCHAR}
+        and f.item_type_code=#{itemTypeCode,jdbcType=VARCHAR}
+        <if test="itemCode!=null and itemCode!=''">
+            and f.item_code=#{itemCode,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <insert id="insertLabIndex" parameterType="com.ylz.cdr.lab.bean.LabIndexCompare">
+        insert into lab_index_compare ( item_type, item_type_code,
+        item_code, item_name,empi,encounter_id,is_compare
+        )
+        values
+        (
+        #{itemType,jdbcType=VARCHAR}, #{itemTypeCode,jdbcType=VARCHAR},
+        #{itemCode,jdbcType=VARCHAR},#{itemName,jdbcType=VARCHAR},
+        #{empi,jdbcType=VARCHAR},#{encounterId,jdbcType=VARCHAR},'1'
+        )
+    </insert>
+
+    <delete id="deleteLabIndex" parameterType="com.ylz.cdr.lab.bean.LabIndexCompare">
+        delete from  lab_index_compare where
+        item_type_code=#{itemTypeCode,jdbcType=VARCHAR}
+        and item_code=#{itemCode,jdbcType=VARCHAR}
+        and empi=#{empi,jdbcType=VARCHAR}
+    </delete>
+</mapper>

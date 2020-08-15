@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cdr-doc.iml" filepath="$PROJECT_DIR$/cdr-doc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emr-api/emr-api.iml" filepath="$PROJECT_DIR$/emr-api/emr-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/file-api/file-api.iml" filepath="$PROJECT_DIR$/file-api/file-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hf-api/hf-api.iml" filepath="$PROJECT_DIR$/hf-api/hf-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manager-api/manager-api.iml" filepath="$PROJECT_DIR$/manager-api/manager-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/monitor-data/monitor-data.iml" filepath="$PROJECT_DIR$/monitor-data/monitor-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/show-360/show-360.iml" filepath="$PROJECT_DIR$/show-360/show-360.iml" />
+      <module fileurl="file://$PROJECT_DIR$/show-hf/show-hf.iml" filepath="$PROJECT_DIR$/show-hf/show-hf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sync-data/sync-data.iml" filepath="$PROJECT_DIR$/sync-data/sync-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/write-360/write-360.iml" filepath="$PROJECT_DIR$/write-360/write-360.iml" />
+      <module fileurl="file://$PROJECT_DIR$/write-hf/write-hf.iml" filepath="$PROJECT_DIR$/write-hf/write-hf.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cda.dao.TdyListDrugMapper">
+
+    <select id="queryInfo" resultType="java.util.Map">
+            SELECT
+                tdy.DRUG_CODE AS drugCode,
+                tdy.DRUG_NAME AS drugName,
+                rep.OPEN_DEPT AS openDept,
+                rep.OPEN_DATE AS openDate,
+                rep.HOSPITAL_NAME AS hospitalName
+            FROM
+                TDY_LIST_DRUG tdy,
+                HDSD00_04_01 rep
+            WHERE
+                rep.unique_id = tdy.unique_id
+                AND rep.DOMAIN_ID = tdy.domain_id
+                AND rep.xds_version = tdy.xds_version
+                AND rep.xds_type = tdy.xds_type
+                AND rep.STATUS = 'AA' and rep.empi=#{empi,jdbcType=VARCHAR}
+                and rep.OPEN_DATE <![CDATA[  >  ]]>#{startTime,jdbcType=VARCHAR}
+            ORDER BY
+                rep.OPEN_DATE DESC
+            limit #{page},#{size}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+            SELECT
+                count(*)
+            FROM
+                TDY_LIST_DRUG tdy,
+                HDSD00_04_01 rep
+            WHERE
+                rep.unique_id = tdy.unique_id
+                AND rep.DOMAIN_ID = tdy.domain_id
+                AND rep.xds_version = tdy.xds_version
+                AND rep.xds_type = tdy.xds_type
+                AND rep.STATUS = 'AA' and rep.empi=#{empi,jdbcType=VARCHAR}
+                and rep.OPEN_DATE <![CDATA[  >  ]]>#{startTime,jdbcType=VARCHAR}
+    </select>
+</mapper>

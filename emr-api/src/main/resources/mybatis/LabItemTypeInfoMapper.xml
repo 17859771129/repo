@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.lab.dao.LabItemTypeInfoMapper">
+    <resultMap id="ItemTypeMap" type="com.ylz.cdr.lab.bean.LabItemTypeInfo">
+        <result column="pk" property="pk" jdbcType="INTEGER"/>
+        <result column="item_type" property="itemType" jdbcType="VARCHAR"/>
+        <result column="item_type_code" property="itemTypeCode" jdbcType="VARCHAR"/>
+        <result column="item_category" property="itemCategory" jdbcType="VARCHAR"/>
+        <result column="item_category_code" property="itemCategoryCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryByItemTypeCode" resultMap="ItemTypeMap" parameterType="java.lang.String">
+        select * from  lab_item_type_info where item_type_code=#{itemTypeCode,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertList">
+        <if test="list!=null and list.size()>0">
+            insert into lab_item_type_info ( item_type, item_type_code,
+            item_category, item_category_code
+            )
+            values
+            <foreach collection="list" item="item" index="index" separator=",">
+                (
+                #{item.itemType,jdbcType=VARCHAR}, #{item.itemTypeCode,jdbcType=VARCHAR},
+                #{item.itemCategory,jdbcType=VARCHAR},#{item.itemCategoryCode,jdbcType=VARCHAR}
+                )
+            </foreach>
+        </if>
+    </insert>
+    <insert id="insert" parameterType="com.ylz.cdr.lab.bean.LabItemTypeInfo">
+        insert into lab_item_type_info ( item_type, item_type_code,
+        item_category, item_category_code
+        )
+        values(
+        #{itemType,jdbcType=VARCHAR}, #{itemTypeCode,jdbcType=VARCHAR},
+        #{itemCategory,jdbcType=VARCHAR},#{itemCategoryCode,jdbcType=VARCHAR}
+        )
+    </insert>
+</mapper>

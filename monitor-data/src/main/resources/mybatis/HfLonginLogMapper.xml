@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.hf.monitor.mapper.HfLoginLogMapper">
+
+    <select id="getCountDocCategoriesByType" parameterType="com.ylz.hf.monitor.daoDto.HfLoginLogDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfLoginLogDTO">
+        select COUNT(*) as countNumber
+        from hf_login_log a
+
+        where a.type=#{dTO.type}
+        <if test="dTO.endProcTime!=null and dTO.startProcTime!=null ">
+            <![CDATA[
+        and a.login_time >  #{dTO.startProcTime}
+		and a.login_time<= #{dTO.endProcTime}
+		]]>
+        </if>
+    </select>
+</mapper>

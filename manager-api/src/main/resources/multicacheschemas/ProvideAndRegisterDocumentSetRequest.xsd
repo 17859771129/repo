@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by wangxien (wangxien) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:xs="urn:hl7-org:v3"
+        targetNamespace="urn:hl7-org:v3" elementFormDefault="qualified">
+    <element name="ProvideAndRegisterDocumentSetRequest">
+        <complexType>
+            <sequence>
+                <element minOccurs="0" name="ID" type="xs:II">
+                    <annotation>
+                        <documentation>消息标识</documentation>
+                    </annotation>
+                </element>
+                <element name="SourcePatientID" type="s:string" minOccurs="0">
+                    <annotation>
+                        <documentation>患者标识</documentation>
+                    </annotation>
+                </element>
+                <element name="SourcePatientName" type="s:string">
+                    <annotation>
+                        <documentation>患者姓名</documentation>
+                    </annotation>
+                </element>
+                <element name="HealthCardId" type="s:string" minOccurs="0">
+                    <annotation>
+                        <documentation>患者健康卡号</documentation>
+                    </annotation>
+                </element>
+                <element name="IdentityId" type="s:string">
+                    <annotation>
+                        <documentation>患者身份证号</documentation>
+                    </annotation>
+                </element>
+                <element name="Organization" type="xs:Organization" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                    <annotation>
+                        <documentation>健康机构信息</documentation>
+                    </annotation>
+                </element>
+                <element name="RegistryPackage" type="xs:RegistryPackage">
+                    <annotation>
+                        <documentation>共享文档注册条目包</documentation>
+                    </annotation>
+                </element>
+                <element name="Document" type="xs:DocumentEntry" maxOccurs="unbounded">
+                    <annotation>
+                        <documentation>提交共享文档内容</documentation>
+                    </annotation>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="II">
+        <attribute name="root" type="s:string">
+            <annotation>
+                <documentation>标识符根</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="extension" type="s:string">
+            <annotation>
+                <documentation>根下唯一标识</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="Organization">
+        <sequence>
+            <element name="Name" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>名称</documentation>
+                </annotation>
+            </element>
+            <element name="TelephoneNumber" type="xs:Telephone" minOccurs="0">
+                <annotation>
+                    <documentation>联系电话</documentation>
+                </annotation>
+            </element>
+            <element name="EmailAddress" type="xs:Email" minOccurs="0">
+                <annotation>
+                    <documentation>电子邮件</documentation>
+                </annotation>
+            </element>
+            <element name="Address" type="xs:Address" minOccurs="0">
+                <annotation>
+                    <documentation>联系地址</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="id" type="s:string">
+            <annotation>
+                <documentation>机构组织代码</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="Telephone">
+        <attribute name="areaCode" type="s:string">
+            <annotation>
+                <documentation>区号</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="countryCode" type="s:string">
+            <annotation>
+                <documentation>国家号</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="extension" type="s:string">
+            <annotation>
+                <documentation>后缀</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="number" type="s:string">
+            <annotation>
+                <documentation>号码</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="phoneType" type="s:string">
+            <annotation>
+                <documentation>电话类型</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="Email">
+        <attribute name="address" type="s:string">
+            <annotation>
+                <documentation>邮件地址</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="type" type="s:string">
+            <annotation>
+                <documentation>类型</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="Address">
+        <attribute name="city" type="s:string">
+            <annotation>
+                <documentation>城市</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="country" type="s:string">
+            <annotation>
+                <documentation>国家</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="postalCode" type="s:string">
+            <annotation>
+                <documentation>邮政编码</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="stateOrProvince" type="s:string">
+            <annotation>
+                <documentation>州、省</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="street" type="s:string">
+            <annotation>
+                <documentation>街道</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="streetNumber" type="s:string">
+            <annotation>
+                <documentation>街道号码</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="RegistryPackage">
+        <sequence>
+            <element name="SubmissionSet" type="xs:SubmissionSet" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>共享文档提交集信息</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="SubmissionSet">
+        <sequence>
+            <element name="ContentTypeCode" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档内容类型代码</documentation>
+                </annotation>
+            </element>
+            <element name="ContentTypeCodeDisplayName" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档内容类型代码名称</documentation>
+                </annotation>
+            </element>
+            <element name="SubmissionTime" type="s:dateTime" minOccurs="0">
+                <annotation>
+                    <documentation>提交时间</documentation>
+                </annotation>
+            </element>
+            <element name="UniqueId" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>提交集唯一标识符</documentation>
+                </annotation>
+            </element>
+            <element name="SourceId" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>贡献提交集的唯一标识符</documentation>
+                </annotation>
+            </element>
+            <element name="PatientID" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>外部患者唯一标识符</documentation>
+                </annotation>
+            </element>
+            <element name="Comments" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>提交集对共享文档描述</documentation>
+                </annotation>
+            </element>
+            <element name="Title" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档标题</documentation>
+                </annotation>
+            </element>
+            <element name="CreateTime" type="s:dateTime" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档创建时间</documentation>
+                </annotation>
+            </element>
+            <element name="ServerOrganization" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>就诊机构名称</documentation>
+                </annotation>
+            </element>
+            <element name="EpisodeID" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>就诊号</documentation>
+                </annotation>
+            </element>
+            <element name="InTime" type="s:dateTime" minOccurs="0">
+                <annotation>
+                    <documentation>入院时间</documentation>
+                </annotation>
+            </element>
+            <element name="OutTime" type="s:dateTime" minOccurs="0">
+                <annotation>
+                    <documentation>出院时间</documentation>
+                </annotation>
+            </element>
+            <element name="AdmissionDepart" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>就诊科室</documentation>
+                </annotation>
+            </element>
+            <element name="AdmissionDoctor" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>主管医生</documentation>
+                </annotation>
+            </element>
+            <element name="AdmissionType" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>就诊类型</documentation>
+                </annotation>
+            </element>
+            <element name="DiagnosisResult" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>诊断</documentation>
+                </annotation>
+            </element>
+            <element name="Author" type="xs:Author" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                <annotation>
+                    <documentation>共享文档作者信息</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="targetObject" type="s:string">
+            <annotation>
+                <documentation>所关联共享文档</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="availabilityStatus" type="s:string">
+            <annotation>
+                <documentation>文档可用状态,取值为:Submitted;Approved</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+    <complexType name="ArrayOfAuthorAuthor">
+        <sequence>
+            <element name="Author" type="xs:Author" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Author">
+        <sequence>
+            <element name="AuthorName" type="s:string">
+                <annotation>
+                    <documentation>共享文档作者</documentation>
+                </annotation>
+            </element>
+            <element name="AuthorInstitution" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档作者所在机构</documentation>
+                </annotation>
+            </element>
+            <element name="AuthorSpecialty" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档作者专业</documentation>
+                </annotation>
+            </element>
+            <element name="AuthorRole" type="s:string" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档作者角色信息</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="DocumentEntry">
+        <sequence>
+            <element name="Content" type="s:base64Binary" minOccurs="0">
+                <annotation>
+                    <documentation>共享文档内容</documentation>
+                </annotation>
+            </element>
+        </sequence>
+        <attribute name="id" type="s:string">
+            <annotation>
+                <documentation>文档唯一标识符</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="mimeType" type="s:string">
+            <annotation>
+                <documentation>文档格式</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="parentDocumentRelationship" type="s:string">
+            <annotation>
+                <documentation>与父文档关系类别</documentation>
+            </annotation>
+        </attribute>
+        <attribute name="parentDocumentId" type="s:string">
+            <annotation>
+                <documentation>父文档唯一标识号</documentation>
+            </annotation>
+        </attribute>
+    </complexType>
+</schema>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.hf.monitor.mapper.HfDocIndexMapper">
+
+    <select id="getHfDocIndexDTOByEntity" parameterType="com.ylz.hf.monitor.daoDto.HfDocIndexDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfDocIndexDTO">
+        SELECT
+        id as id ,
+        message_id as messageId ,
+        domain_id as domainId ,
+        xds_version as xdsVersion ,
+        xds_type as xdsType ,
+        global_id as globalId ,
+        encounter_id as encounterId ,
+        patient_id as patientId ,
+        patient_name as patientName ,
+        health_card as healthCard ,
+        identity_id as identityId ,
+        agency_id as agencyId ,
+        agency_name as agencyName ,
+        agency_area as agencyArea ,
+        agency_tel as agencyTel ,
+        agency_email as agencyEmail ,
+        agency_city as agencyCity ,
+        agency_country as agencyCountry ,
+        agency_postal as agencyPostal ,
+        agency_state as agencyState ,
+        agency_street as agencyStreet ,
+        agency_num as agencyNum ,
+        submit_time as submitTime ,
+        unique_id as uniqueId ,
+        source_id as sourceId ,
+        comments as comments ,
+        title as title ,
+        create_time as createTime ,
+        server_name as serverName ,
+        episode_id as episodeId ,
+        start_time as startTime ,
+        end_time as endTime ,
+        dept_name as deptName ,
+        admission_name as admissionName ,
+        admission_type as admissionType ,
+        diagnosis_result as diagnosisResult ,
+        author_name as authorName ,
+        author_agency as authorAgency ,
+        author_dept as authorDept ,
+        author_level as authorLevel ,
+        doc_id as docId ,
+        parent_relation as parentRelation ,
+        parent_doc_id as parentDocId ,
+        content as content ,
+        file_path as filePath ,
+        repository_unique_id as repositoryUniqueId ,
+        cda_path as cdaPath ,
+        pdf_path as pdfPath ,
+        html_path as htmlPath ,
+        proc_status as procStatus ,
+        proc_time as procTime ,
+        error_info as errorInfo ,
+        cda_status as cdaStatus ,
+        cda_time as cdaTime ,
+        cda_error_info as cdaErrorInfo
+        from hf_doc_index
+
+        where 1=1
+
+        <if test="hfDocIndexDTO.repositoryUniqueId!=null">
+            and repository_unique_id=#{hfDocIndexDTO.repositoryUniqueId}
+        </if>
+    </select>
+
+    <select id="selectTotal" resultType="java.lang.Integer">
+        SELECT
+        count( * )
+        FROM
+        hf_doc_index d
+        WHERE
+        d.xds_type IN ( SELECT h.doc_code FROM manager_doc h WHERE h.doc_category = #{docCategory} )
+        <if test="startTime !=null and startTime!=''">
+            and d.proc_time <![CDATA[ > ]]> #{startTime}
+        </if>
+    </select>
+
+    <select id="selectGroupTotal" resultType="java.util.Map">
+        SELECT
+        d.xds_type as code,
+        count( * ) as total
+        FROM
+        hf_doc_index d
+        <if test="startTime !=null and startTime!=''">
+            WHERE d.proc_time <![CDATA[ > ]]> #{startTime}
+        </if>
+        GROUP BY
+        d.xds_type
+    </select>
+</mapper>

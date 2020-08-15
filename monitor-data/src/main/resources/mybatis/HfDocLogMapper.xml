@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.hf.monitor.mapper.HfDocLogMapper">
+
+    <select id="getHfDocLogPages" parameterType="com.ylz.hf.monitor.daoDto.HfDocLogDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfDocLogDTO">
+        select
+        d.id as id,
+        d.message_id as messageId,
+        d.domain_id as domainId,
+        d.xds_version as xdsVersion,
+        d.xds_type as xdsType,
+        d.patient_id as patientId,
+        d.patient_name as patientName,
+        d.health_card as healthCard,
+        d.identity_id as identityId,
+        d.agency_id as agencyId,
+        d.agency_name as agencyName,
+        d.agency_area as agencyArea,
+        d.agency_tel as agencyTel,
+        d.agency_email as agencyEmail,
+        d.agency_city as agencyCity,
+        d.agency_country as agencyCountry,
+        d.agency_postal as agencyPostal,
+        d.agency_state as agencyState,
+        d.agency_street as agencyStreet,
+        d.agency_num as agencyNum,
+        d.submit_time as submitTime,
+        d.unique_id as uniqueId,
+        d.source_id as sourceId,
+        d.comments as comments,
+        d.title as title,
+        d.create_time as createTime,
+        d.server_name as serverName,
+        d.episode_id as episodeId,
+        d.start_time as startTime,
+        d.end_time as endTime,
+        d.dept_name as deptName,
+        d.admission_name as admissionName,
+        d.admission_type as admissionType,
+        d.diagnosis_result as diagnosisResult,
+        d.author_name as authorName,
+        d.author_agency as authorAgency,
+        d.author_dept as authorDept,
+        d.author_level as authorLevel,
+        d.doc_id as docId,
+        d.parent_relation as parentRelation,
+        d.parent_doc_id as parentDocId,
+        d.content as content,
+        d.file_path as filePath,
+        d.repository_unique_id as repositoryUniqueId,
+        d.proc_status as procStatus,
+        d.proc_time as procTime,
+        a.doc_cn   as docCn,
+        d.error_info as errorInfo
+        from hf_doc_log d,
+        manager_doc a
+
+        where d.xds_type=a.doc_code
+        <if test="hfDocLogDTO.startCreateTime!=null and hfDocLogDTO.endCreateTime!=null ">
+            <![CDATA[
+            and d.create_time > #{hfDocLogDTO.startCreateTime}
+            and d.create_time <= #{hfDocLogDTO.endCreateTime}
+            ]]>
+        </if>
+        <if test="hfDocLogDTO.endProcTime!=null and hfDocLogDTO.startProcTime!=null ">
+            <![CDATA[
+        and d.proc_time >  #{hfDocLogDTO.startProcTime}
+		and d.proc_time <= #{hfDocLogDTO.endProcTime}
+		]]>
+        </if>
+        <if test="hfDocLogDTO.domainId!=null">
+            and d.domain_id=#{hfDocLogDTO.domainId}
+        </if>
+        <if test="hfDocLogDTO.xdsType!=null">
+            and d.xds_type=#{hfDocLogDTO.xdsType}
+        </if>
+        order by d.create_time
+        desc
+    </select>
+
+
+</mapper>

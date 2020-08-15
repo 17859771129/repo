@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylz.cdr.show.dao.DrugMapper">
+    <resultMap id="WestMap" type="com.ylz.cdr.show.vo.WestDrug">
+        <result column="DRUG_PATHWAY_CODE" property="drugPathwayCode" jdbcType="VARCHAR"/>
+        <result column="DRUG_SUBDOSE_UNIT" property="drugSubdoseUnit" jdbcType="VARCHAR"/>
+        <result column="DRUG_SUBDOSE" property="drugSubdose" jdbcType="VARCHAR"/>
+        <result column="DRUG_FREQUENCY_CODE" property="drugFrequencyCode" jdbcType="VARCHAR"/>
+        <result column="DRUG_FREQUENCY" property="drugFrequency" jdbcType="VARCHAR"/>
+        <result column="DRUG_DOST_CODE" property="drugDostCode" jdbcType="VARCHAR"/>
+        <result column="DRUG_CODE" property="drugCode" jdbcType="VARCHAR"/>
+        <result column="DRUG_NAME" property="drugName" jdbcType="VARCHAR"/>
+        <result column="DRUG_SPECIFIC" property="drugSpecific" jdbcType="VARCHAR"/>
+        <result column="DRUGS_TOTAL" property="drugsTotal" jdbcType="VARCHAR"/>
+        <result column="RECIPEL_DAYS" property="recipelDays" jdbcType="VARCHAR"/>
+        <result column="PDRUG_GROUP" property="pdrugGroup" jdbcType="VARCHAR"/>
+        <result column="RECIPEL_REMARK" property="recipelRemark" jdbcType="VARCHAR"/>
+        <result column="OPEN_NAME" property="openName" jdbcType="VARCHAR"/>
+        <result column="OPEN_DEPT" property="openDept" jdbcType="VARCHAR"/>
+        <result column="OPEN_DATE" property="openDate" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_NAME" property="orgName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ChineseMap" type="com.ylz.cdr.show.vo.ChineseDrug">
+        <result column="DRUG_PATHWAY_CODE" property="drugPathwayCode" jdbcType="VARCHAR"/>
+        <result column="DRUG_PATHWAY" property="drugPathway" jdbcType="VARCHAR"/>
+        <result column="DRUG_SUBDOSE_UNIT" property="drugSubdoseUnit" jdbcType="VARCHAR"/>
+        <result column="DRUG_SUBDOSE" property="drugSubdose" jdbcType="VARCHAR"/>
+        <result column="DRUG_FREQUENCY_UNIT" property="drugFrequencyUnit" jdbcType="VARCHAR"/>
+        <result column="DRUG_FREQUENCY" property="drugFrequency" jdbcType="VARCHAR"/>
+        <result column="DRUG_DOSE_NAME" property="drugDoseName" jdbcType="VARCHAR"/>
+        <result column="DRUG_DOST_CODE" property="drugDostCode" jdbcType="VARCHAR"/>
+        <result column="DRUG_CODE" property="drugCode" jdbcType="VARCHAR"/>
+        <result column="DRUG_NAME" property="drugName" jdbcType="VARCHAR"/>
+        <result column="DRUG_SPECIFIC" property="drugSpecific" jdbcType="VARCHAR"/>
+        <result column="DRUGS_TOTAL" property="drugsTotal" jdbcType="VARCHAR"/>
+        <result column="RECIPEL_DAYS" property="recipelDays" jdbcType="VARCHAR"/>
+        <result column="PDRUG_GROUP" property="pdrugGroup" jdbcType="VARCHAR"/>
+        <result column="TCM_PIECES" property="tcmPieces" jdbcType="VARCHAR"/>
+        <result column="TCM_NUM_TABLETS" property="tcmNumTablets" jdbcType="VARCHAR"/>
+        <result column="TCM_METHOD" property="tcmMethod" jdbcType="VARCHAR"/>
+        <result column="TCM_DRUG_USE" property="tcmDrugUse" jdbcType="VARCHAR"/>
+        <result column="PCATEGORY_NAME" property="pcategoryName" jdbcType="VARCHAR"/>
+        <result column="PCATEGORY_CODE" property="pcategoryCode" jdbcType="VARCHAR"/>
+        <result column="OPEN_NAME" property="openName" jdbcType="VARCHAR"/>
+        <result column="OPEN_DEPT" property="openDept" jdbcType="VARCHAR"/>
+        <result column="OPEN_DATE" property="openDate" jdbcType="VARCHAR"/>
+        <result column="HOSPITAL_NAME" property="orgName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getWestListByPersonId" resultMap="WestMap" parameterType="java.util.Map">
+        select tdy.DRUG_PATHWAY_CODE, tdy.DRUG_SUBDOSE,
+        tdy.DRUG_SUBDOSE_UNIT, tdy.DRUG_FREQUENCY,
+        tdy.DRUG_FREQUENCY_UNIT, tdy.DRUG_DOST_CODE,
+        tdy.DRUG_CODE,tdy.DRUG_NAME,
+        tdy.DRUG_SPECIFIC, tdy.DRUGS_TOTAL, tdy.RECIPEL_DAYS,
+        tdy.PDRUG_GROUP, tdy.RECIPEL_REMARK,rep.OPEN_NAME,rep.OPEN_DEPT,rep.OPEN_DATE,rep.HOSPITAL_NAME
+        from TDY_LIST_DRUG tdy , HDSD00_04_01 rep where rep.DOC_PIPELINE_ID = tdy.doc_unique and
+        rep.DOC_DOMAIN_ID = tdy.doc_domain_id and
+        rep.version = tdy.doc_version and
+        rep.LOAD_TYPE = tdy.doc_type
+        and tdy.empi=#{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and tdy.ENCOUNTER_ID = #{encounterId}
+        </if>
+        limit #{page},#{size}
+    </select>
+
+    <select id="getChineseListByPersonId" resultMap="ChineseMap" parameterType="java.util.Map">
+        select tdy.DRUG_PATHWAY_CODE, tdy.DRUG_PATHWAY,
+        tdy.DRUG_SUBDOSE,
+        tdy.DRUG_SUBDOSE_UNIT, tdy.DRUG_FREQUENCY,
+        tdy.DRUG_FREQUENCY_UNIT,
+        tdy.DRUG_DOSE_NAME, tdy.DRUG_DOST_CODE, tdy.DRUG_CODE,
+        tdy.DRUG_NAME, tdy.DRUG_SPECIFIC, tdy.DRUGS_TOTAL,
+        tdy.RECIPEL_DAYS, tdy.PDRUG_GROUP, tdy.TCM_PIECES,
+        tdy.TCM_NUM_TABLETS, tdy.TCM_METHOD, tdy.TCM_DRUG_USE,
+        tdy.PCATEGORY_CODE, tdy.PCATEGORY_NAME,rep.OPEN_NAME,rep.OPEN_DEPT,rep.OPEN_DATE,rep.HOSPITAL_NAME
+        from TDY_LIST_DRUG tdy , HDSD00_04_02 rep where rep.DOC_PIPELINE_ID = tdy.doc_unique and
+        rep.DOC_DOMAIN_ID = tdy.doc_domain_id and
+        rep.version = tdy.doc_version and
+        rep.LOAD_TYPE = tdy.doc_type
+        and tdy.empi=#{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and tdy.ENCOUNTER_ID = #{encounterId}
+        </if>
+        limit #{page},#{size}
+    </select>
+
+    <select id="countChinese" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT
+        count( * )
+        FROM
+        TDY_LIST_DRUG tdy,
+        ( SELECT * FROM HDSD00_04_02 WHERE empi = #{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and ENCOUNTER_ID = #{encounterId}
+        </if>
+        ) dd
+        WHERE
+        dd.DOC_PIPELINE_ID = tdy.doc_unique
+        AND dd.DOC_DOMAIN_ID = tdy.doc_domain_id
+        AND dd.version = tdy.doc_version
+        AND dd.LOAD_TYPE = tdy.doc_type
+    </select>
+
+    <select id="countWest" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT
+        count( * )
+        FROM
+        TDY_LIST_DRUG tdy,
+        ( SELECT * FROM HDSD00_04_01 WHERE empi = #{personId}
+        <if test="encounterId!= null and encounterId != ''">
+            and ENCOUNTER_ID = #{encounterId}
+        </if>
+        ) dd
+        WHERE
+        dd.DOC_PIPELINE_ID = tdy.doc_unique
+        AND dd.DOC_DOMAIN_ID = tdy.doc_domain_id
+        AND dd.version = tdy.doc_version
+        AND dd.LOAD_TYPE = tdy.doc_type
+    </select>
+
+    <select id="getVisitByPersonId" parameterType="java.util.Map"
+            resultType="com.ylz.cdr.show.vo.IndexInfo">
+        select * from (SELECT
+        de.encounter_id as encounterId,
+        date_format(de.visit_date,'%Y-%m-%d') as visitDateTime,
+        de.leave_date as dischargeDateTime,
+        de.hospital_name as orgName,
+        de.visit_dept as deptName
+        from patient_visit de where de.encounter_id in (select DISTINCT (ENCOUNTER_ID) from HDSD00_04_01 where
+        STATUS='AA'
+        and empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and ENCOUNTER_ID=#{encounterId}
+        </if>
+        union all
+        select DISTINCT (ENCOUNTER_ID) from HDSD00_04_02 where STATUS='AA' and empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and ENCOUNTER_ID=#{encounterId}
+        </if>)
+        and de.global_id=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and de.ENCOUNTER_ID=#{encounterId}
+        </if>
+        group by de.encounter_id,de.visit_date,de.leave_date,de.leave_date,de.hospital_name,de.visit_dept) f
+        ORDER BY f.visitDateTime desc
+    </select>
+
+</mapper>

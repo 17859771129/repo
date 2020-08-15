@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.lab.dao.LabItemInfoMapper">
+    <resultMap id="ItemMap" type="com.ylz.cdr.lab.bean.LabItemInfo">
+        <result column="pk" property="pk" jdbcType="INTEGER"/>
+        <result column="item_type" property="itemType" jdbcType="VARCHAR"/>
+        <result column="item_type_code" property="itemTypeCode" jdbcType="VARCHAR"/>
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="item_max_value" property="itemMaxValue" jdbcType="VARCHAR"/>
+        <result column="item_min_value" property="itemMinValue" jdbcType="VARCHAR"/>
+        <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryByUniqueId" resultMap="ItemMap">
+        select * from lab_item_info
+        where item_type_code=#{itemTypeCode,jdbcType=VARCHAR}
+        <if test="itemCode!=null and itemCode!=''">
+            and item_code=#{itemCode,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <insert id="insertList">
+        <if test="list!=null and list.size()>0">
+            insert into lab_item_info ( item_type, item_type_code,
+            item_code, item_name,item_max_value,item_min_value,item_unit
+            )
+            values
+            <foreach collection="list" item="item" index="index" separator=",">
+                (
+                #{item.itemType,jdbcType=VARCHAR}, #{item.itemTypeCode,jdbcType=VARCHAR},
+                #{item.itemCode,jdbcType=VARCHAR},#{item.itemName,jdbcType=VARCHAR},
+                #{item.itemMaxValue,jdbcType=VARCHAR},#{item.itemMinValue,jdbcType=VARCHAR},
+                #{item.itemUnit,jdbcType=VARCHAR}
+                )
+            </foreach>
+        </if>
+    </insert>
+    <insert id="insert" parameterType="com.ylz.cdr.lab.bean.LabItemInfo">
+        insert into lab_item_info ( item_type, item_type_code,
+        item_code, item_name,item_max_value,item_min_value,item_unit
+        )
+        values
+        (
+        #{itemType,jdbcType=VARCHAR}, #{itemTypeCode,jdbcType=VARCHAR},
+        #{itemCode,jdbcType=VARCHAR},#{itemName,jdbcType=VARCHAR},
+        #{itemMaxValue,jdbcType=VARCHAR},#{itemMinValue,jdbcType=VARCHAR},
+        #{itemUnit,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+</mapper>

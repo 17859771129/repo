@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.person.dao.PatientVisitMapper">
+
+    <select id="pageByPersonId" resultType="com.ylz.person.vo.VisitView">
+        select * from (SELECT
+        e.patient_id AS patientId,
+        e.visit_flow_id AS visitNo,
+        DATE_FORMAT( e.visit_date, '%Y-%m-%d' ) AS visitDateTime,
+        DATE_FORMAT( e.leave_date, '%Y-%m-%d' ) AS dischargeDateTime,
+        e.patient_category_code AS encounterType,
+        e.patient_category AS encounterTypeName,
+        e.visit_dept AS visitDeptName,
+        e.visit_doctor AS doctorName,
+        e.encounter_id AS encounterId,
+        concat(e.admit_diagnose_name,e.admit_diagnose_name) as diagnosis
+        FROM
+        patient_visit e
+        WHERE
+        e.global_id = #{globalId,jdbcType=VARCHAR}
+        <if test="startTime !=null and startTime!=''">
+            and DATE_FORMAT(visit_date, '%Y-%m-%d' ) >= DATE_FORMAT(#{startTime} , '%Y-%m-%d' )
+        </if>
+        <if test="encounterId !=null and encounterId !=''">
+            and encounter_id =#{encounterId,jdbcType=VARCHAR}
+        </if>
+        GROUP BY
+        e.patient_id,
+        e.visit_flow_id,
+        e.visit_date,
+        e.patient_category,
+        e.visit_dept,
+        e.encounter_id,
+        e.visit_doctor) f
+        order by visitDateTime desc,visitNo desc
+        <if test="size >0">
+            LIMIT #{from},#{size}
+        </if>
+    </select>
+
+    <select id="countByPersonId" resultType="java.lang.Integer">
+        select COUNT(*) from patient_visit where global_id = #{globalId,jdbcType=VARCHAR}
+        <if test="startTime !=null and startTime!=''">
+            and DATE_FORMAT(visit_date, '%Y-%m-%d' ) >= DATE_FORMAT(#{startTime} , '%Y-%m-%d' )
+        </if>
+        <if test="encounterId !=null and encounterId !=''">
+            and encounter_id =#{encounterId}
+        </if>
+    </select>
+
+    <select id="getVisitByPersonId" resultType="java.util.Map">
+        SELECT
+        b.encounter_id AS encounterId,
+        date_format( b.visit_date, "%Y-%m-%d" ) AS visitDateTime,
+        b.hospital_name AS orgName,
+        date_format( b.leave_date, "%Y-%m-%d" ) AS dischargeDateTime,
+        b.visit_dept AS deptName,
+        b.global_id as globalId
+        FROM
+        patient_visit b
+        WHERE
+        b.global_id = #{globalId}
+        <if test="encounterIdSet!=null and encounterIdSet.size>0">
+            AND b.encounter_id IN
+            <foreach collection="encounterIdSet" item="encounterId" open="(" separator="," close=")">
+                #{encounterId}
+            </foreach>
+        </if>
+        ORDER BY b.visit_date DESC
+    </select>
+
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.hf.monitor.mapper.HfAccessLogMapper">
+
+
+    <select id="getHfAccessLogDTOListPage" parameterType="com.ylz.hf.monitor.daoDto.HfAccessLogDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfAccessLogDTO">
+        select
+
+        a.id as id ,
+        a.message_id as messageId ,
+        a.domain_id as receiveDomainId ,
+        d.domain_id as sendDomainId,
+        d.xds_type as xdsType,
+        a.unique_id as uniqueId ,
+        a.repository_unique_id as repositoryUniqueId ,
+        a.proc_status as procStatus ,
+        a.proc_time as procTime ,
+        a.error_info as errorInfo ,
+        a.file_path as filePath ,
+        a.receive_time as receiveTime ,
+        TIME_TO_SEC(TIMEDIFF(a.proc_time,a.receive_time)) as timeToSec
+        from hf_access_log a,hf_doc_index d
+        where a.repository_unique_id=d.repository_unique_id
+        <if test="hfAccessLogDTO.procStatus!=null and hfAccessLogDTO.procStatus!=null ">
+            and a.proc_status=#{hfAccessLogDTO.procStatus}
+        </if>
+        <if test="hfAccessLogDTO.startReceiveTime!=null and hfAccessLogDTO.endReceiveTime!=null">
+            <![CDATA[
+        and a.receive_time > #{hfAccessLogDTO.startReceiveTime}
+		and a.receive_time<= #{hfAccessLogDTO.endReceiveTime}
+		]]>
+        </if>
+
+    </select>
+
+    <select id="getHfDocLogAvgTime" parameterType="com.ylz.hf.monitor.daoDto.HfAccessLogDTO"
+            resultType="com.ylz.hf.monitor.daoDto.HfAccessLogDTO">
+        select
+        AVG(t.time) avgTime
+        from (select id as id,TIME_TO_SEC(TIMEDIFF(proc_time,receive_time)) as time from hf_access_log
+        where 1=1
+        <if test="hfAccessLogDTO.procStatus!=null and hfAccessLogDTO.procStatus!=null ">
+            and proc_status=#{hfAccessLogDTO.procStatus}
+        </if>
+        <if test="hfAccessLogDTO.startReceiveTime!=null and hfAccessLogDTO.endReceiveTime!=null">
+            <![CDATA[
+        and receive_time >  #{hfAccessLogDTO.startReceiveTime}
+		and receive_time<= #{hfAccessLogDTO.endReceiveTime}
+		]]>
+        </if>) t
+
+    </select>
+
+</mapper>

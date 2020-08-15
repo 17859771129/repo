@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.cdr.show.dao.OrderMapper">
+    <resultMap id="OrderMap" type="com.ylz.cdr.bean.TdyListOrder">
+        <result column="pk" property="pk" jdbcType="INTEGER"/>
+        <result column="doc_unique" property="docUnique" jdbcType="VARCHAR"/>
+        <result column="doc_domain_id" property="docDomainId" jdbcType="VARCHAR"/>
+        <result column="doc_version" property="docVersion" jdbcType="VARCHAR"/>
+        <result column="doc_type" property="docType" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR"/>
+        <result column="TCM_DRUG_USE" property="tcmDrugUse" jdbcType="VARCHAR"/>
+        <result column="STOP_ORDER_DATE" property="stopOrderDate" jdbcType="VARCHAR"/>
+        <result column="STOP_ORDER_CODE" property="stopOrderCode" jdbcType="VARCHAR"/>
+        <result column="STOP_ORDER" property="stopOrder" jdbcType="VARCHAR"/>
+        <result column="PDRUG_GROUP" property="pdrugGroup" jdbcType="VARCHAR"/>
+        <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR"/>
+        <result column="ORDER_START_DATE" property="orderStartDate" jdbcType="VARCHAR"/>
+        <result column="ORDER_REMARK" property="orderRemark" jdbcType="VARCHAR"/>
+        <result column="ORDER_END_DATE" property="orderEndDate" jdbcType="VARCHAR"/>
+        <result column="ORDER_CONTENT" property="orderContent" jdbcType="VARCHAR"/>
+        <result column="ORDER_CODE" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="ORDER_CATEGORY_CODE" property="orderCategoryCode" jdbcType="VARCHAR"/>
+        <result column="ORDER_CATEGORY" property="orderCategory" jdbcType="VARCHAR"/>
+        <result column="OPEN_ORDER_DEPT" property="openOrderDept" jdbcType="VARCHAR"/>
+        <result column="OPEN_ORDER_DATE" property="openOrderDate" jdbcType="VARCHAR"/>
+        <result column="OPEN_ORDER" property="openOrder" jdbcType="VARCHAR"/>
+        <result column="OPEN_ORDER_CODE" property="openOrderCode" jdbcType="VARCHAR"/>
+        <result column="EXECUTOR_STATUS" property="executorStatus" jdbcType="VARCHAR"/>
+        <result column="EXECUTOR_ORDER_CODE" property="executorOrderCode" jdbcType="VARCHAR"/>
+        <result column="EXECUTOR_ORDER" property="executorOrder" jdbcType="VARCHAR"/>
+        <result column="EXECUTOR_DEPT" property="executorDept" jdbcType="VARCHAR"/>
+        <result column="EXECUTOR_DATE" property="executorDate" jdbcType="VARCHAR"/>
+        <result column="DISCHARGE_ORDER" property="dischargeOrder" jdbcType="VARCHAR"/>
+        <result column="DECOCT_METHOD" property="decoctMethod" jdbcType="VARCHAR"/>
+        <result column="CHECK_ORDER_DATE" property="checkOrderDate" jdbcType="VARCHAR"/>
+        <result column="CHECK_ORDER_CODE" property="checkOrderCode" jdbcType="VARCHAR"/>
+        <result column="CHECK_ORDER" property="checkOrder" jdbcType="VARCHAR"/>
+        <result column="CANCEL_ORDER_DATE" property="cancelOrderDate" jdbcType="VARCHAR"/>
+        <result column="CANCEL_ORDER_CODE" property="cancelOrderCode" jdbcType="VARCHAR"/>
+        <result column="CANCEL_ORDER" property="cancelOrder" jdbcType="VARCHAR"/>
+        <result column="AUDIT_ORDER_DATE" property="auditOrderDate" jdbcType="VARCHAR"/>
+        <result column="AUDIT_ORDER_CODE" property="auditOrderCode" jdbcType="VARCHAR"/>
+        <result column="AUDIT_ORDER" property="auditOrder" jdbcType="VARCHAR"/>
+        <result column="APPY_ID" property="appyId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getInpatEncounterListByPersonId" parameterType="java.util.Map"
+            resultType="com.ylz.cdr.show.vo.IndexInfo">
+        select * from (select
+        de.encounter_id as encounterId,
+        date_format(de.visit_date,'%Y-%m-%d') as visitDateTime,
+        de.leave_date as dischargeDateTime,
+        de.hospital_name as orgName,
+        de.visit_dept as deptName
+        FROM patient_visit de
+        where de.encounter_id in(
+        select DISTINCT (ENCOUNTER_ID) from HDSD00_15_01 exam
+        where
+        exam.STATUS='AA'
+        AND exam.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and exam.ENCOUNTER_ID=#{encounterId}
+        </if>
+        ) AND de.global_id=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and de.encounter_id=#{encounterId}
+        </if>
+        group by de.encounter_id,de.visit_date,de.leave_date,de.leave_date,de.hospital_name,de.visit_dept) f
+        ORDER BY f.visitDateTime desc
+    </select>
+
+    <select id="getOrderInpatListByPersonId" parameterType="java.util.Map" resultMap="OrderMap">
+        SELECT
+        tdy.*
+        from HDSD00_15_01 ord left join TDY_LIST_ORDER tdy on (ord.DOC_PIPELINE_ID = tdy.doc_unique and
+        ord.DOC_DOMAIN_ID = tdy.doc_domain_id and
+        ord.version = tdy.doc_version and
+        ord.LOAD_TYPE = tdy.doc_type )
+        where
+        ord.STATUS='AA' and ord.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and ord.ENCOUNTER_ID=#{encounterId}
+        </if>
+        <choose>
+            <when test="isDrug==1">
+                and tdy.ORDER_TYPE ='用药类医嘱'
+            </when>
+            <when test="isDrug==2">
+                and tdy.ORDER_TYPE !='用药类医嘱'
+            </when>
+        </choose>
+        limit #{page},#{size}
+    </select>
+
+    <select id="getOrderInpatListByPersonIdCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        from HDSD00_15_01 ord left join TDY_LIST_ORDER tdy on (ord.DOC_PIPELINE_ID = tdy.doc_unique and
+        ord.DOC_DOMAIN_ID = tdy.doc_domain_id and
+        ord.version = tdy.doc_version and
+        ord.LOAD_TYPE = tdy.doc_type )
+        where
+        ord.STATUS='AA' and ord.empi=#{personId}
+        <if test="encounterId!=null and encounterId!=''">
+            and ord.ENCOUNTER_ID=#{encounterId}
+        </if>
+        <choose>
+            <when test="isDrug==1">
+                and tdy.ORDER_TYPE ='用药类医嘱'
+            </when>
+            <when test="isDrug==2">
+                and tdy.ORDER_TYPE !='用药类医嘱'
+            </when>
+        </choose>
+    </select>
+</mapper>

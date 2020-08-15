@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ylz.hf.dao.DocIndexMapper">
+    <select id="queryIndex" resultType="java.util.Map">
+        SELECT
+        hh.id,hh.domain_id as domainId,hh.xds_type as xdsType,hh.xds_version as xdsVersion
+        ,hh.unique_id as uniqueId,hh.start_time as visitTime,
+        hh.agency_id as agencyId,hh.agency_name as agencyName
+        ,v.visit_dept as visitDept,v.visit_dept_code as visitDeptCode
+        FROM
+        (
+        SELECT
+        *
+        FROM
+        hf_doc_index h
+        WHERE
+        h.xds_type = #{xdsType,jdbcType=VARCHAR}
+        AND h.global_id = #{globalId,jdbcType=VARCHAR}
+        <if test="startTime !=null and startTime !=''">
+            AND h.start_time <![CDATA[  >  ]]>#{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test="endTime !=null and endTime !=''">
+            AND h.start_time <![CDATA[  <  ]]>#{endTime,jdbcType=VARCHAR}
+        </if>
+        <if test="agencyName !=null and agencyName !=''">
+            AND h.agency_name LIKE CONCAT("%",#{agencyName,jdbcType=VARCHAR},"%")
+        </if>
+        ) hh,
+        patient_visit v
+        WHERE hh.global_id = v.global_id
+        and hh.encounter_id = v.encounter_id
+        and hh.cda_status='AA'
+        <if test="visitDept !=null and visitDept !=''">
+            AND v.visit_dept LIKE CONCAT("%",#{visitDept,jdbcType=VARCHAR},"%")
+        </if>
+        order by hh.start_time desc
+    </select>
+</mapper>

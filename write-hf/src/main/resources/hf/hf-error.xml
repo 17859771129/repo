@@ -1,0 +1,9 @@
+<GetDocumentStroedInfoResponse
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="urn:hl7-org:v3"
+        xsi:schemaLocation="urn:hl7-org:v3 ../multicacheschemas/GetDocumentStroedInfoResponse.xsd"
+        status="AE">
+    <Id root="响应消息OID" extension="4F7A4991-1037-4213-A724-1A68DB3F900D"/>
+    <TargetId root="请求消息OID" extension="DDD34F6E-2E89-435A-9A62-F4CD3D4DE23B"/>
+    <Detail>状态信息细节</Detail>
+</GetDocumentStroedInfoResponse>

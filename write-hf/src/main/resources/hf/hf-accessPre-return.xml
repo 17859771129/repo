@@ -1,0 +1,16 @@
+<GetDocumentStroedInfoResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                               xmlns="urn:hl7-org:v3"
+                               xsi:schemaLocation="urn:hl7-org:v3 ../multicacheschemas/GetDocumentStroedInfoResponse.xsd"
+                               status="${status}">
+    <Id root="${senderDomainId}" extension="${senderId}"/>
+    <TargetId root="${receiveDomainId}" extension="${receiveId}"/>
+    <#list list as item>
+    <DocumentSet>
+        <DocumentUniqueId>${item.uniqueId}</DocumentUniqueId>
+        <RepositoryUniqueId>${item.repositoryUniqueId}</RepositoryUniqueId>
+        <DocumentTitle>${item.title}</DocumentTitle>
+        <DocUrl>${item.docUrl}</DocUrl>
+    </DocumentSet>
+</#list>
+<Detail>${detail}</Detail>
+        </GetDocumentStroedInfoResponse>

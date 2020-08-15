@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylz.manager.dao.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.ylz.manager.bean.UserRole">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.ylz.manager.vo.UserVo">
+    insert into user_role (user_name, role_id,
+      create_time, modify_time, flag
+      )
+    values ( #{userName,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER},
+      now(), now(), '1'
+      )
+  </insert>
+</mapper>
